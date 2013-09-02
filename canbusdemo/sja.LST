@@ -1,0 +1,257 @@
+C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 1   
+
+
+C51 COMPILER V7.50, COMPILATION OF MODULE SJA
+OBJECT MODULE PLACED IN sja.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE sja.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          //===================================================================================
+   2          //      工程名称：      CAN总线收发一体程序
+   3          //      功能描述：      利用CAN总线实现双向can语音传输
+   4          
+   5          //  IDE环境：   KEILC （or later）
+   6          //      程序设计：      曙光单片机科技淘宝店
+   7          //        
+   8          //      组成文件：      main.c, FUNCTION.h,CAN.H
+   9          //                              
+  10          //      硬件连接：  STC89C5X+SJA1000+CTM8251+AMBE1000   
+  11          //
+  12          //      维护记录：      2012-10-26      v1.0 
+  13          //===================================================================================
+  14          
+  15          #include  "stdio.h"
+  16          #include  "string.h"
+  17          #include  "intrins.h"
+  18          #include  "Function.h"
+  19          #include  "SJA1000.h"
+  20          #include  "RSCOM.h"
+  21          #include  "reg51.h"
+  22          void CAN_Send_anylength(unsigned char *CAN_TX_Buf,unsigned char length1);
+  23          
+  24          unsigned char data Tmod_data;
+  25          unsigned char run_lamp_flush_count = 0;
+  26          unsigned char run_lamp_flush_time = 10;
+  27          sbit  run_lamp = P1^0;
+  28          unsigned char data send_data[10],RevceData[10];
+  29          unsigned char data Com_RecBuff[8]={0x01,0x02,0x03,0x4,0x05,0x06,0x07,0x08};
+  30          
+  31          unsigned char bdata flag_init;
+  32          //*************************
+  33          void display(unsigned char num);
+  34          
+  35          #define INBUF_LEN 8   //数据长度
+  36          
+  37          unsigned char inbuf1[INBUF_LEN];
+  38          unsigned char checksum,count3=0;
+  39          bit  read_flag=0;
+  40          sbit P10=P1^0;
+  41          sbit P11=P1^1;
+  42          sbit P12=P1^2;
+  43          sbit P13=P1^3;
+  44          sbit P16=P1^6;
+  45          sbit P37=P3^7;
+  46          sbit P34=P3^4;
+  47          
+  48          sbit key=P3^3; //Button按键
+  49          sbit P2_0=P2^0;//数码管位选
+  50          sbit P2_1=P2^1;
+  51          sbit P2_2=P2^2;//数码管位选
+  52          sbit P2_3=P2^3;
+  53          
+  54          //***************************
+  55          sbit rcv_flag=flag_init^0;
+C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 2   
+
+  56          sbit err_flag=flag_init^0;
+  57          sbit CS=P2^0;
+  58          unsigned char RECOK;
+  59          unsigned int msg;
+  60          //***************************
+  61          void time_intt0(void) interrupt 1 using 2 
+  62          {
+  63   1        ET0=0;TR0=0;TH0=0xb8;TL0=0x00;
+  64   1        CAN_Send_anylength(inbuf1,count3);
+  65   1        count3=0;
+  66   1        memset(inbuf1,0,8);
+  67   1      }
+  68          //串口接收中断函数 
+  69          void serial () interrupt 4 using 1 
+  70          {  
+  71   1       
+  72   1          if(RI)
+  73   1          {
+  74   2              
+  75   2              unsigned char ch;
+  76   2              RI = 0;
+  77   2              ET0=1;TR0=1;
+  78   2              ch=SBUF;
+  79   2              {
+  80   3                   inbuf1[count3]=ch;
+  81   3                   count3=count3+1;
+  82   3                   if( count3==INBUF_LEN)
+  83   3                   {
+  84   4                       ET0=0;TR0=0;TH0=0xb8;TL0=0x00;//关闭定时中断，停止定时中断
+  85   4                       count3=0;
+  86   4                       CAN_Send_anylength(inbuf1,8);
+  87   4                       memset(inbuf1,0,8);
+  88   4                       
+  89   4                   }
+  90   3                }
+  91   2             }
+  92   1      }
+  93          /****************************************************
+  94          **函数原型：  void ex0_int(void) interrupt 0 //using 1
+  95          **功    能：  中断接收函数
+  96          **入口参数:   无 
+  97          **出口参数:   RevceData[]数组   
+  98          **说    明:   当sja1000 收到正确的报文时,会产生int中断           
+  99          *****************************************************/
+ 100          void ex0_int(void) interrupt 0 using 1
+ 101          {
+ 102   1              unsigned char tt,tt1,length,i;
+ 103   1              static int cnt = 1;
+ 104   1       
+ 105   1       SJA_BCANAdr=REG_INTERRUPT;
+ 106   1       if((*SJA_BCANAdr)&0x01)                   //产生了接收中断
+ 107   1       {  
+ 108   2          SJA_BCANAdr=REG_RXBuffer1;
+ 109   2          tt=*SJA_BCANAdr;
+ 110   2          tt1=*SJA_BCANAdr;
+ 111   2          length=tt1&0x0F;
+ 112   2           if ((tt&0x40)!=0x40)                   //数据帧   = 为远程帧
+ 113   2           {  
+ 114   3           SJA_BCANAdr =REG_RXBuffer4 ;           //宏定义的变量不能memcpy(RevceData,REG_RXBuffer4,8); 
+ 115   3           
+ 116   3           memcpy(RevceData,SJA_BCANAdr,length);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
+ 117   3      
+C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 3   
+
+ 118   3      #if 0
+                       display(cnt);//数码管显示 
+                      send_char_com(cnt);
+              
+                      cnt++;
+              #endif  
+ 124   3      #if 1
+ 125   3       
+ 126   3               display(RevceData[0]);//数码管显示 
+ 127   3      
+ 128   3                                                  //以下代码是发送到串
+ 129   3          for(i=0;i<length;i++)
+ 130   3           send_char_com(RevceData[i]);
+ 131   3       #endif    
+ 132   3           }
+ 133   2      
+ 134   2           BCAN_CMD_PRG(RRB_CMD);                  //释放SJA1000接收缓冲区，****已经修改
+ 135   2      
+ 136   2      
+ 137   2       }
+ 138   1      } 
+*** WARNING C280 IN LINE 103 OF SJA.C: 'cnt': unreferenced local variable
+ 139          /****************************************************
+ 140          **函数原型：  void display(unsigned char num) 
+ 141          **功    能：  数码管显示
+ 142          **入口参数:   要显示字符 
+ 143          **出口参数:   无
+ 144          **说    明:   当SJA1000收到正确的报文时,然后显示出来           
+ 145          *****************************************************/
+ 146          unsigned char code table[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8
+             -e};
+ 147          void display(unsigned char num)  // 显示子函数
+ 148          
+ 149          {
+ 150   1      
+ 151   1                      P2_0=0;//选通第一位数码管的阳极位选端,即给数码管的共阳极供电
+ 152   1              P2_1=0;//选通第二位数码管的阳极位选端,即给数码管的共阳极供电
+ 153   1              P2_2=0;//选通第一位数码管的阳极位选端,即给数码管的共阳极供电
+ 154   1              P2_3=0;//选通第二位数码管的阳极位选端,即给数码管的共阳极供电
+ 155   1              P1=table[num]; //将第num个显示编码送P0口
+ 156   1      }
+ 157          //***************************************************
+ 158          
+ 159          //初始化cpu
+ 160          
+ 161          //**************************************************
+ 162          void Init_Cpu(void)                                  //单片机初始化,开放外部中断0
+ 163          {
+ 164   1           PX0=1;
+ 165   1           EX0=1;
+ 166   1           IT0=0;
+ 167   1          // EA=1;
+ 168   1      }
+ 169          
+ 170          /****************************************************
+ 171          **函数原型：   void main(void)
+ 172          **功    能：   主程序部分:
+ 173          **入口参数:    无 
+ 174          **返 回 值:     
+ 175          *****************************************************/
+ 176          
+ 177          void main(void)
+C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 4   
+
+ 178          {  
+ 179   1          unsigned char temptt,ss;
+ 180   1              unsigned char num=0;
+ 181   1          EA=0;
+ 182   1          Init_Cpu();  
+ 183   1          init_serialcomm();     //初始化串口 
+ 184   1          timer0initial();       //定时器0初始化
+ 185   1              display(10);              //显示该板号A 
+ 186   1          //初始化SJA1000     
+ 187   1          ss=Sja_1000_Init();
+ 188   1          if (ss!=0)             //初始化失败
+ 189   1            //send_string_com("init fail!");**********************
+ 190   1            send_char_com(0xBB);              //测试专用发送到串口看状态   
+ 191   1          else
+ 192   1            EA=1; //初始化成功，开总中断
+ 193   1      
+ 194   1               send_char_com(0xaa);
+ 195   1         
+ 196   1           //次标识位可以作为，串口接收完，置标志然后发送出去或者当作按键发送******
+ 197   1         while(1) 
+ 198   1         { 
+ 199   2           
+ 200   2           //CAN_Send_anylength(Com_RecBuff,8);
+ 201   2           if(key==0) 
+ 202   2             {
+ 203   3              delay10ms();
+ 204   3                      while(key==0);
+ 205   3              num=num+1;if(num==16) num=0;
+ 206   3               //发送按键状态
+ 207   3                  CAN_Send_onebyte(num,1);
+ 208   3                      display(num); 
+ 209   3              if(num==16) num=0;
+ 210   3              delay10ms();
+ 211   3                 }
+ 212   2           
+ 213   2           SJA_BCANAdr = REG_STATUS;    
+ 214   2           temptt=*SJA_BCANAdr;         
+ 215   2           delay_ms(100);
+ 216   2        if ((temptt&0x40)==0x40)                     //读错误状态
+ 217   2      
+ 218   2          {  
+ 219   3          Sja_1000_Init();
+ 220   3          send_char_com(0xee);                    //测试专用发送到串口看状态                     
+ 221   3        }
+ 222   2         }   
+ 223   1      
+ 224   1      }
+ 225          
+ 226          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1436    ----
+   CONSTANT SIZE    =     16    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     49      30
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      1       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

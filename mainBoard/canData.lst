@@ -1,0 +1,106 @@
+C51 COMPILER V7.50   CANDATA                                                               09/02/2013 03:18:52 PAGE 1   
+
+
+C51 COMPILER V7.50, COMPILATION OF MODULE CANDATA
+OBJECT MODULE PLACED IN .\canData.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\common\canData.c BROWSE DEBUG OBJECTEXTEND PRINT(.\canData.lst) OBJECT(.
+                    -\canData.obj)
+
+line level    source
+
+   1          #include "stdio.h"
+   2          #include "string.h"
+   3          #include "canData.h"
+   4          
+   5          
+   6          
+   7          
+   8          
+   9          
+  10          void setBoard(uint8 id, uint8 dataIn)
+  11          {
+  12   1      
+  13   1      
+  14   1      
+  15   1      }
+*** WARNING C280 IN LINE 10 OF ..\COMMON\CANDATA.C: 'id': unreferenced local variable
+*** WARNING C280 IN LINE 10 OF ..\COMMON\CANDATA.C: 'dataIn': unreferenced local variable
+  16          
+  17          
+  18          void handleCmdSet(int dataSize, uint8 *dataIn)
+  19          {
+  20   1              unsigned char i = 0;
+  21   1              uint8 * dataPtr = dataIn;
+  22   1      
+  23   1              for(i = 0; i < dataSize/2; i++)
+  24   1              {
+  25   2                      dataPtr += i*2;
+  26   2                      setBoard(*dataPtr, *(dataPtr+1));
+  27   2              }
+  28   1      }
+  29          
+  30          
+  31          
+  32          void handleCanRequest(canFrameStruct * canFrame)
+  33          {
+  34   1              uint8 cmd = GET_CMD(canFrame);
+  35   1              int dataSize = GET_DATA_SIZE(canFrame);
+  36   1      
+  37   1              switch(cmd)
+  38   1              {
+  39   2                      case CMD_SET:
+  40   2                      {
+  41   3                              handleCmdSet(dataSize, canFrame->canData);
+  42   3                              break;
+  43   3                      }
+  44   2      
+  45   2      
+  46   2                      case CMD_READ:
+  47   2                      {
+  48   3      
+  49   3                              break;
+  50   3                      }
+  51   2                      
+  52   2                      
+C51 COMPILER V7.50   CANDATA                                                               09/02/2013 03:18:52 PAGE 2   
+
+  53   2      
+  54   2                      
+  55   2      
+  56   2                              
+  57   2                      
+  58   2              }
+  59   1              
+  60   1      
+  61   1      
+  62   1      
+  63   1      }
+  64          
+  65          
+  66          void sendCanReply(canFrameStruct * canFrame)
+  67          {
+  68   1      
+  69   1      
+  70   1      
+  71   1      }
+*** WARNING C280 IN LINE 66 OF ..\COMMON\CANDATA.C: 'canFrame': unreferenced local variable
+  72          
+  73          
+  74          
+  75          
+  76          
+  77          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    124    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      11
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  3 WARNING(S),  0 ERROR(S)

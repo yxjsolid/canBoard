@@ -1,0 +1,1332 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+D:\workspace\board\mainBoard\mainBoard.uv2
+Project File Date:  09/01/2013
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(8): error C141: syntax error near 'id', expected ')'
+..\COMMON\CANDATA.C(16): error C141: syntax error near '*', expected ')'
+..\COMMON\CANDATA.C(19): error C202: 'dataPtr': undefined identifier
+..\COMMON\CANDATA.C(19): error C141: syntax error near '='
+..\COMMON\CANDATA.C(23): error C202: 'dataPtr': undefined identifier
+..\COMMON\CANDATA.C(24): error C202: 'dataPtr': undefined identifier
+..\COMMON\CANDATA.C(30): error C141: syntax error near '*', expected ')'
+..\COMMON\CANDATA.C(32): error C202: 'uint8': undefined identifier
+..\COMMON\CANDATA.C(32): error C141: syntax error near 'cmd'
+..\COMMON\CANDATA.C(33): error C141: syntax error near 'int'
+..\COMMON\CANDATA.C(33): error C202: 'dataSize': undefined identifier
+..\COMMON\CANDATA.C(35): error C202: 'cmd': undefined identifier
+..\COMMON\CANDATA.C(37): error C202: 'CMD_SET': undefined identifier
+..\COMMON\CANDATA.C(39): error C202: 'dataSize': undefined identifier
+..\COMMON\CANDATA.C(39): error C141: syntax error near 'data', expected '<id>'
+..\COMMON\CANDATA.C(44): error C202: 'CMD_READ': undefined identifier
+..\COMMON\CANDATA.C(64): error C141: syntax error near '*', expected ')'
+compiling RS485.c...
+..\COMMON\RS485.C(7): error C141: syntax error near '*', expected ')'
+..\COMMON\RS485.C(16): error C129: missing ';' before 'searchDataStartPattern'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.H(23): error C141: syntax error near '['
+..\COMMON\CANDATA.H(23): error C141: syntax error near '['
+..\COMMON\CANDATA.C(10): error C141: syntax error near ')'
+..\COMMON\CANDATA.C(18): error C141: syntax error near ')'
+..\COMMON\CANDATA.C(21): error C141: syntax error near 'data'
+..\COMMON\CANDATA.C(26): error C208: '_setBoard': too many actual parameters
+..\COMMON\CANDATA.C(32): error C141: syntax error near '*', expected ')'
+..\COMMON\CANDATA.C(34): error C202: 'canFrame': undefined identifier
+..\COMMON\CANDATA.C(35): error C202: 'canFrame': undefined identifier
+..\COMMON\CANDATA.C(41): error C141: syntax error near 'data', expected '<id>'
+..\COMMON\CANDATA.C(66): error C141: syntax error near '*', expected ')'
+compiling RS485.c...
+..\COMMON\RS485.H(20): error C141: syntax error near ';'
+..\COMMON\RS485.H(21): error C141: syntax error near '}'
+..\COMMON\RS485.C(8): error C141: syntax error near ','
+..\COMMON\RS485.C(28): error C141: syntax error near ':'
+..\COMMON\RS485.C(30): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(36): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(39): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(49): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(52): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(62): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(65): error C172: 'default': missing enclosing switch
+..\COMMON\RS485.C(67): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(79): error C129: missing ';' before 'rsData'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): error C141: syntax error near ')'
+..\COMMON\CANDATA.C(18): error C141: syntax error near ')'
+..\COMMON\CANDATA.C(21): error C141: syntax error near 'data'
+..\COMMON\CANDATA.C(26): error C208: '_setBoard': too many actual parameters
+..\COMMON\CANDATA.C(41): error C208: '_handleCmdSet': too many actual parameters
+compiling RS485.c...
+..\COMMON\RS485.H(20): error C141: syntax error near ';'
+..\COMMON\RS485.H(21): error C141: syntax error near '}'
+..\COMMON\RS485.C(8): error C141: syntax error near ','
+..\COMMON\RS485.C(28): error C141: syntax error near ':'
+..\COMMON\RS485.C(30): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(36): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(39): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(49): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(52): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(62): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(65): error C172: 'default': missing enclosing switch
+..\COMMON\RS485.C(67): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(79): error C129: missing ';' before 'rsData'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+..\COMMON\RS485.C(20): warning C260: '=': pointer truncation
+..\COMMON\RS485.C(28): error C141: syntax error near ':'
+..\COMMON\RS485.C(30): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(36): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(39): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(49): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(52): error C172: 'case': missing enclosing switch
+..\COMMON\RS485.C(62): error C171: 'break': missing enclosing loop
+..\COMMON\RS485.C(65): error C172: 'default': missing enclosing switch
+..\COMMON\RS485.C(67): error C171: 'break': missing enclosing loop
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+..\COMMON\RS485.C(20): warning C260: '=': pointer truncation
+..\COMMON\RS485.C(32): error C216: subscript on non-array or too many dimensions
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+..\COMMON\RS485.C(101): error C174: return-expression on void-function
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+..\COMMON\RS485.C(151): error C193: '=': incompatible operand
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0034H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SERIAL_SEND?RS485
+    LENGTH:  0005H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+Program Size: data=194.2 xdata=0 code=3088
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0034H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SERIAL_SEND?RS485
+    LENGTH:  0005H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+Program Size: data=194.2 xdata=0 code=3088
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SERIAL_SEND?RS485
+    LENGTH:  0005H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+Program Size: data=194.2 xdata=0 code=3088
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SERIAL_SEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+Program Size: data=193.2 xdata=0 code=3083
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+Program Size: data=189.2 xdata=0 code=3070
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SENDCANREPLY?CANDATA
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+Program Size: data=186.2 xdata=0 code=3041
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_RSDATASEND?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SENDCANREPLY?CANDATA
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+Program Size: data=185.2 xdata=0 code=3027
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+Program Size: data=172.1 xdata=0 code=3022
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 17 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(83): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(84): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(8): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\RS485.C(8): warning C280: 'size': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+Program Size: data=171.2 xdata=0 code=3017
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 17 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+*** WARNING C318 IN LINE 5 OF main.c: can't open file 'RS485.h'
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(724): warning C206: 'serial_send_char': missing function-prototype
+MAIN.C(724): error C267: 'serial_send_char': requires ANSI-style prototype
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(10): error C202: 'SBUF': undefined identifier
+..\COMMON\RS485.C(11): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(12): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(20): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+*** WARNING C318 IN LINE 5 OF main.c: can't open file 'RS485.h'
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(724): warning C206: 'serial_send_char': missing function-prototype
+MAIN.C(724): error C267: 'serial_send_char': requires ANSI-style prototype
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(10): error C202: 'SBUF': undefined identifier
+..\COMMON\RS485.C(11): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(12): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(20): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+*** WARNING C318 IN LINE 5 OF main.c: can't open file 'RS485.h'
+MAIN.C(6): error C141: syntax error near 'dataIn', expected ')'
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(10): error C202: 'SBUF': undefined identifier
+..\COMMON\RS485.C(11): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(12): error C202: 'TI': undefined identifier
+..\COMMON\RS485.C(20): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+*** WARNING C318 IN LINE 5 OF main.c: can't open file 'RS485.h'
+MAIN.C(6): error C141: syntax error near 'dataIn', expected ')'
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(21): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+*** WARNING C318 IN LINE 5 OF main.c: can't open file 'RS485.h'
+MAIN.C(6): error C141: syntax error near 'dataIn', expected ')'
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(21): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(21): error C141: syntax error near '}'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.C(164): warning C206: 'serial_send': missing function-prototype
+..\COMMON\RS485.C(164): error C267: 'serial_send': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+Program Size: data=165.2 xdata=0 code=2998
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+Program Size: data=165.2 xdata=0 code=2998
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_RSDATASEND?RS485
+Program Size: data=164.3 xdata=0 code=2993
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(992): error C195: '*' illegal indirection
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(996): warning C206: 'rsDataSend': missing function-prototype
+MAIN.C(996): error C267: 'rsDataSend': requires ANSI-style prototype
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=157.3 xdata=0 code=3061
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 13 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=158.3 xdata=0 code=3056
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=158.3 xdata=0 code=3058
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=158.3 xdata=0 code=3065
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(85): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(86): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=158.3 xdata=0 code=3065
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(90): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(91): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=174.3 xdata=0 code=3065
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(90): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(91): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?RSDATARECEIVE?RS485
+    LENGTH:  0004H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SENDCANREPLY?CANDATA
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_BCAN_SET_CONTROL?MAIN
+    LENGTH:  0001H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SJA_TEST?MAIN
+    LENGTH:  0001H
+Program Size: data=190.3 xdata=0 code=3065
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(90): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(91): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=169.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=169.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+../COMMON/RS485.H(33): error C129: missing ';' before 'extern'
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+..\COMMON\RS485.H(33): error C129: missing ';' before 'extern'
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=153.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=169.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0013H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SEARCHDATASTARTPATTERN?RS485
+    LENGTH:  0003H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SETBOARD?CANDATA
+    LENGTH:  0002H
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: ?DT?_SJA_TEST?MAIN
+    LENGTH:  0001H
+Program Size: data=201.3 xdata=0 code=3059
+Target not created
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=201.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(89): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(90): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+compiling canData.c...
+..\COMMON\CANDATA.C(10): warning C280: 'id': unreferenced local variable
+..\COMMON\CANDATA.C(10): warning C280: 'dataIn': unreferenced local variable
+..\COMMON\CANDATA.C(66): warning C280: 'canFrame': unreferenced local variable
+compiling RS485.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_HANDLECANREQUEST?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SENDCANREPLY?CANDATA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?RSDATARECEIVE?RS485
+Program Size: data=233.3 xdata=0 code=3059
+creating hex file from "mainBoard"...
+"mainBoard" - 0 Error(s), 14 Warning(s).

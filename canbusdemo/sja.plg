@@ -1,0 +1,334 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+D:\Keil  work\sja1000.11.2\sja.uv2
+Project File Date:  11/02/2008
+
+<h2>Output:</h2>
+compiling sja.c...
+SJA.C(135): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer2': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer3': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer4': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer5': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer6': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer7': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer8': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer9': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer10': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer9': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer10': undefined identifier
+sja.c - 20 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(135): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer2': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer3': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer4': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer5': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer6': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer7': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer8': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer9': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer10': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer9': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer10': undefined identifier
+sja.c - 20 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(135): error C202: 'REG_RxBuffer2': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer3': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer4': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer5': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer6': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer7': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer8': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer9': undefined identifier
+SJA.C(135): error C202: 'REG_RxBuffer10': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer9': undefined identifier
+SJA.C(137): error C202: 'REG_TxBuffer10': undefined identifier
+sja.c - 19 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(160): warning C206: 'BCAN_ENTER_RETMODEL': missing function-prototype
+SJA.C(162): warning C206: 'BCAN_CREATE_COMMUNATION': missing function-prototype
+SJA.C(165): warning C206: 'BCAN_SET_OUTCLK': missing function-prototype
+SJA.C(165): error C267: 'BCAN_SET_OUTCLK': requires ANSI-style prototype
+sja.c - 1 Error(s), 3 Warning(s).
+compiling sja.c...
+SJA.C(160): warning C206: 'BCAN_ENTER_RETMODEL': missing function-prototype
+SJA.C(162): warning C206: 'BCAN_CREATE_COMMUNATION': missing function-prototype
+SJA.C(165): warning C206: 'BCAN_SET_OUTCLK': missing function-prototype
+SJA.C(165): error C267: 'BCAN_SET_OUTCLK': requires ANSI-style prototype
+sja.c - 1 Error(s), 3 Warning(s).
+compiling sja.c...
+SJA.C(177): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(181): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(184): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(187): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(193): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(197): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(200): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(203): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+SJA.C(373): error C202: 'RevceData': undefined identifier
+SJA.C(374): error C202: 'RevceData': undefined identifier
+SJA.C(375): error C202: 'RevceData': undefined identifier
+SJA.C(376): error C202: 'RevceData': undefined identifier
+SJA.C(377): error C202: 'RevceData': undefined identifier
+SJA.C(378): error C202: 'RevceData': undefined identifier
+SJA.C(379): error C202: 'RevceData': undefined identifier
+SJA.C(380): error C202: 'RevceData': undefined identifier
+sja.c - 25 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(177): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(181): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(184): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(187): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(193): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(197): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(200): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(203): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 17 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(177): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(181): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(184): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(187): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(193): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(197): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(200): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(203): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 17 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(181): error C202: 'REG_TxBuffer2': undefined identifier
+SJA.C(184): error C202: 'REG_TxBuffer3': undefined identifier
+SJA.C(187): error C202: 'REG_TxBuffer4': undefined identifier
+SJA.C(193): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(197): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(200): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(203): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 16 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(193): error C202: 'REG_TxBuffer5': undefined identifier
+SJA.C(197): error C202: 'REG_TxBuffer6': undefined identifier
+SJA.C(200): error C202: 'REG_TxBuffer7': undefined identifier
+SJA.C(203): error C202: 'REG_TxBuffer8': undefined identifier
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 13 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(241): error C202: 'ByteRate_40k': undefined identifier
+SJA.C(245): error C202: 'ByteRate_50k': undefined identifier
+SJA.C(249): error C202: 'ByteRate_80k': undefined identifier
+SJA.C(265): error C202: 'ByteRate_400k': undefined identifier
+SJA.C(269): error C202: 'ByteRate_500k': undefined identifier
+SJA.C(273): error C202: 'ByteRate_800k': undefined identifier
+SJA.C(277): error C202: 'ByteRate_1000k': undefined identifier
+SJA.C(367): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(371): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 9 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(375): error C202: 'REG_RxBuffer1': undefined identifier
+SJA.C(379): error C202: 'REG_RxBuffer6': undefined identifier
+sja.c - 2 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(381): warning C206: 'send_char_com': missing function-prototype
+SJA.C(381): error C267: 'send_char_com': requires ANSI-style prototype
+sja.c - 1 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(195): error C202: 'count3': undefined identifier
+SJA.C(196): error C202: 'count3': undefined identifier
+SJA.C(197): error C202: 'checksum': undefined identifier
+SJA.C(201): error C202: 'count3': undefined identifier
+SJA.C(202): error C202: 'count3': undefined identifier
+SJA.C(203): error C202: 'checksum': undefined identifier
+SJA.C(204): error C202: 'count3': undefined identifier
+SJA.C(206): error C202: 'read_flag': undefined identifier
+sja.c - 8 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(460): warning C206: 'BCAN_CMD_PRG': missing function-prototype
+SJA.C(460): error C267: 'BCAN_CMD_PRG': requires ANSI-style prototype
+SJA.C(475): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(484): error C231: '_BCAN_CMD_PRG': redefinition
+SJA.C(494): error C202: 'SRR_CMD': undefined identifier
+SJA.C(572): error C141: syntax error near '}'
+SJA.C(583): error C202: 'CS': undefined identifier
+sja.c - 6 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(460): warning C206: 'BCAN_CMD_PRG': missing function-prototype
+SJA.C(460): error C267: 'BCAN_CMD_PRG': requires ANSI-style prototype
+SJA.C(475): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(484): error C231: '_BCAN_CMD_PRG': redefinition
+SJA.C(494): error C202: 'SRR_CMD': undefined identifier
+SJA.C(572): error C141: syntax error near '}'
+SJA.C(583): error C202: 'CS': undefined identifier
+sja.c - 6 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(460): warning C206: 'BCAN_CMD_PRG': missing function-prototype
+SJA.C(460): error C267: 'BCAN_CMD_PRG': requires ANSI-style prototype
+SJA.C(475): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(484): error C231: '_BCAN_CMD_PRG': redefinition
+SJA.C(494): error C202: 'SRR_CMD': undefined identifier
+SJA.C(572): error C141: syntax error near '}'
+sja.c - 5 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(461): warning C206: 'BCAN_CMD_PRG': missing function-prototype
+SJA.C(461): error C267: 'BCAN_CMD_PRG': requires ANSI-style prototype
+SJA.C(476): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(485): error C231: '_BCAN_CMD_PRG': redefinition
+SJA.C(495): error C202: 'SRR_CMD': undefined identifier
+SJA.C(573): error C141: syntax error near '}'
+sja.c - 5 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(461): warning C206: 'BCAN_CMD_PRG': missing function-prototype
+SJA.C(461): error C267: 'BCAN_CMD_PRG': requires ANSI-style prototype
+SJA.C(476): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(485): error C231: '_BCAN_CMD_PRG': redefinition
+SJA.C(573): error C141: syntax error near '}'
+sja.c - 4 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(529): error C202: 'REG_TxBuffer1': undefined identifier
+SJA.C(583): error C141: syntax error near '}'
+sja.c - 2 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(583): error C141: syntax error near '}'
+sja.c - 1 Error(s), 0 Warning(s).
+compiling sja.c...
+SJA.C(594): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(600): warning C209: '_send_string_com': too few actual parameters
+SJA.C(604): error C202: 'RECOK': undefined identifier
+SJA.C(606): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(607): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(608): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(609): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(610): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(624): error C202: 'RECOK': undefined identifier
+SJA.C(625): error C202: 'RECOK': undefined identifier
+SJA.C(632): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(633): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(634): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(635): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(636): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(637): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(638): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(639): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(648): error C202: 'REG_ECC': undefined identifier
+sja.c - 17 Error(s), 2 Warning(s).
+compiling sja.c...
+SJA.C(595): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(601): warning C209: '_send_string_com': too few actual parameters
+SJA.C(607): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(608): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(609): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(610): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(611): error C202: 'Send_CAN_Info_ID': undefined identifier
+SJA.C(633): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(634): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(635): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(636): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(637): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(638): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(639): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(640): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(649): error C202: 'REG_ECC': undefined identifier
+sja.c - 14 Error(s), 2 Warning(s).
+compiling sja.c...
+SJA.C(594): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(600): warning C209: '_send_string_com': too few actual parameters
+SJA.C(632): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(633): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(634): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(635): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(636): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(637): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(638): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(639): error C202: 'Com_RecBuff': undefined identifier
+SJA.C(648): error C202: 'REG_ECC': undefined identifier
+sja.c - 9 Error(s), 2 Warning(s).
+compiling sja.c...
+SJA.C(595): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(601): warning C209: '_send_string_com': too few actual parameters
+SJA.C(649): error C202: 'REG_ECC': undefined identifier
+sja.c - 1 Error(s), 2 Warning(s).
+compiling sja.c...
+SJA.C(595): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(602): error C141: syntax error near 'else'
+SJA.C(649): error C202: 'REG_ECC': undefined identifier
+sja.c - 2 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(595): warning C206: 'Init_Cpu': missing function-prototype
+SJA.C(650): error C202: 'REG_ECC': undefined identifier
+sja.c - 1 Error(s), 1 Warning(s).
+compiling sja.c...
+SJA.C(595): warning C206: 'Init_Cpu': missing function-prototype
+sja.c - 0 Error(s), 1 Warning(s).
+compiling sja.c...
+sja.c - 0 Error(s), 0 Warning(s).
+compiling sja.c...
+sja.c - 0 Error(s), 0 Warning(s).

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"main.obj" 
+TO "can_board" 
+RAMSIZE(256) 

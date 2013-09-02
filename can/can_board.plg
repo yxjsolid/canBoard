@@ -1,0 +1,521 @@
+<html>
+<body>
+<pre>
+<h1>µVision2 Build Log</h1>
+<h2>Project:</h2>
+D:\workspace\board\can\can_board.uv2
+Project File Date:  08/18/2013
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(915): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1936
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1936
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SJA_TEST?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=108.2 xdata=0 code=1933
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 10 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1936
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ONEBYTE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1928
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 10 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ONEBYTE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1939
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 10 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1946
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1953
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(918): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1953
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1964
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1964
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1964
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1967
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1970
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(924): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1974
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(931): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1985
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(931): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1985
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(931): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1983
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(931): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1983
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(933): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1983
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(934): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=1985
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(960): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=107.2 xdata=0 code=2030
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling main.c...
+main.c(84): warning C317: attempt to redefine macro 'BTR0_Rate_10k'
+main.c(85): warning C317: attempt to redefine macro 'BTR1_Rate_10k'
+MAIN.C(947): warning C280: 'temptt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_CAN_SEND_ANYLENGTH?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10MS?MAIN
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?MAIN
+Program Size: data=109.2 xdata=0 code=2129
+creating hex file from "can_board"...
+"can_board" - 0 Error(s), 9 Warning(s).

@@ -1,0 +1,6 @@
+"STARTUP.obj",
+"main.obj",
+".\canData.obj",
+".\RS485.obj" 
+TO "mainBoard" 
+RAMSIZE(256) 

@@ -1,0 +1,766 @@
+  首页 | 供应信息 | 采购信息 | PDF资料 | 技术资料 | 行业资讯 | 产品展示 | 人才市场  进入会员区 
+大家帮忙看看我的CAN总线代码正确吗？能收能发，硬件：C51+SJA1000+TJA1040
+
+#include "absacc.h"
+
+#include"stdio.h"
+
+#include"string.h"
+
+#include"intrins.h"
+
+//#include "AT89X51.H"
+
+#include "reg52.h"
+
+//定义SJA1000的基址
+
+#define SJA_BaseAdr0X7F00
+
+// 控制寄存器
+
+#defineREG_MODESJA_BaseAdr+0x00//内部控制寄存器
+
+#defineREG_COMMANDSJA_BaseAdr+0x01//命令寄存器
+
+#defineREG_STATUSSJA_BaseAdr+0x02//状态寄存器
+
+#defineREG_INTERRUPTSJA_BaseAdr+0x03//中断寄存器
+
+#defineREG_INTENABLESJA_BaseAdr+0x04//中断使能寄存器
+
+#defineREG_BTR0SJA_BaseAdr+0x06//总线定时寄存器0
+
+#defineREG_BTR1SJA_BaseAdr+0x07//总线定时寄存器1
+
+#defineREG_OCRSJA_BaseAdr+0x08//输出控制寄存器
+
+#defineREG_TESTSJA_BaseAdr+0x09//测试寄存器
+
+#defineREG_RESVER1SJA_BaseAdr+0x0A//保留1
+
+#defineREG_ARBITRATESJA_BaseAdr+0x0B//仲裁丢失捕捉
+
+#defineREG_ERRCATCHSJA_BaseAdr+0x0C//错误代码捕捉
+
+#defineREG_ERRLIMITSJA_BaseAdr+0x0D//错误报警限额
+
+#defineREG_RXERRSJA_BaseAdr+0x0E//接收错误计数器
+
+#defineREG_TXERRSJA_BaseAdr+0x0F//发送错误计数器
+
+#defineREG_ACR1SJA_BaseAdr+0x10//验收代码寄存器
+
+#defineREG_ACR2SJA_BaseAdr+0x11//验收代码寄存器
+
+#defineREG_ACR3SJA_BaseAdr+0x12//验收代码寄存器
+
+#defineREG_ACR4SJA_BaseAdr+0x13//验收代码寄存器
+
+#defineREG_AMR1SJA_BaseAdr+0x14//验收屏蔽寄存器
+
+#defineREG_AMR2SJA_BaseAdr+0x15//验收屏蔽寄存器
+
+#defineREG_AMR3SJA_BaseAdr+0x16//验收屏蔽寄存器
+
+#defineREG_AMR4SJA_BaseAdr+0x17//验收屏蔽寄存器
+
+// 发送缓冲区寄存器
+
+#defineREG_TXD_FIDSJA_BaseAdr+0x10//发送缓冲区1
+
+#defineREG_TXD_ID1SJA_BaseAdr+0x11//发送缓冲区2
+
+#defineREG_TXD_ID2SJA_BaseAdr+0x12//发送缓冲区3
+
+#defineREG_TXD_ID3SJA_BaseAdr+0x13//发送缓冲区4
+
+#defineREG_TXD_ID4SJA_BaseAdr+0x14//发送缓冲区5
+
+#defineREG_TXBuffer1SJA_BaseAdr+0x15//发送缓冲区6
+
+#defineREG_TXBuffer2SJA_BaseAdr+0x16//发送缓冲区7
+
+#defineREG_TXBuffer3SJA_BaseAdr+0x17//发送缓冲区8
+
+#defineREG_TXBuffer4SJA_BaseAdr+0x18//发送缓冲区9
+
+#defineREG_TXBuffer5SJA_BaseAdr+0x19//发送缓冲区10
+
+#defineREG_TXBuffer6SJA_BaseAdr+0x1A//发送缓冲区11
+
+#defineREG_TXBuffer7SJA_BaseAdr+0x1B//发送缓冲区12
+
+#defineREG_TXBuffer8SJA_BaseAdr+0x1C//发送缓冲区13
+
+// 接收缓冲区寄存器
+
+#defineREG_RXD_FIDSJA_BaseAdr+0x10//接收缓冲区1
+
+#defineREG_RXD_ID1SJA_BaseAdr+0x11//接收缓冲区2
+
+#defineREG_RXD_ID2SJA_BaseAdr+0x12//接收缓冲区3
+
+#defineREG_RXD_ID3SJA_BaseAdr+0x13//接收缓冲区4
+
+#defineREG_RXD_ID4SJA_BaseAdr+0x14//接收缓冲区5
+
+#defineREG_RXBuffer1SJA_BaseAdr+0x15//接收缓冲区6
+
+#defineREG_RXBuffer2SJA_BaseAdr+0x16//接收缓冲区7
+
+#defineREG_RXBuffer3SJA_BaseAdr+0x17//接收缓冲区8
+
+#defineREG_RXBuffer4SJA_BaseAdr+0x18//接收缓冲区9
+
+#defineREG_RXBuffer5SJA_BaseAdr+0x19//接收缓冲区10
+
+#defineREG_RXBuffer6SJA_BaseAdr+0x1A//接收缓冲区11
+
+#defineREG_RXBuffer7SJA_BaseAdr+0x1B//接收缓冲区12
+
+#defineREG_RXBuffer8SJA_BaseAdr+0x1C//接收缓冲区13
+
+#defineREG_RXCOUNTSJA_BaseAdr+0x1D//RX报文计数器
+
+#defineREG_RBSASJA_BaseAdr+0x1E//接收缓冲区起始地址
+
+#defineREG_CDRSJA_BaseAdr+0x1F//时钟分频寄存器
+
+/*
+
+功能说明:CAN控制器SJA1000通讯波特率.SJA1000的晶振为必须为
+
+16MHZ*/
+
+#defineBTR0_Rate_20k0x53//20KBPS的预设值
+
+#defineBTR1_Rate_20k0x2F//20KBPS的预设值
+
+#defineBTR0_Rate_40k0x87//40KBPS的预设值
+
+#defineBTR1_Rate_40k0xFF//40KBPS的预设值
+
+#defineBTR0_Rate_50k0x47//50KBPS的预设值
+
+#defineBTR1_Rate_50k0x2F//50KBPS的预设值
+
+#defineBTR0_Rate_80k0x83//80KBPS的预设值
+
+#defineBTR1_Rate_80k0xFF//80KBPS的预设值
+
+#defineBTR0_Rate_100k0x43//100KBPS的预设值
+
+#defineBTR1_Rate_100k0x2f//100KBPS的预设值
+
+#defineBTR0_Rate_125k0x03//125KBPS的预设值
+
+#defineBTR1_Rate_125k0x1c//125KBPS的预设值
+
+#defineBTR0_Rate_200k0x81//200KBPS的预设值
+
+#defineBTR1_Rate_200k0xFA//200KBPS的预设值
+
+#defineBTR0_Rate_250k0x01//250KBPS的预设值
+
+#defineBTR1_Rate_250k0x1c//250KBPS的预设值
+
+#defineBTR0_Rate_400k0x80//400KBPS的预设值
+
+#defineBTR1_Rate_400k0xfa//400KBPS的预设值
+
+#defineBTR0_Rate_500k0x00//500KBPS的预设值
+
+#defineBTR1_Rate_500k0x1c//500KBPS的预设值
+
+#defineBTR0_Rate_666k0x80//666KBPS的预设值
+
+#defineBTR1_Rate_666k0xb6//666KBPS的预设值
+
+#defineBTR0_Rate_800k0x00//800KBPS的预设值
+
+#defineBTR1_Rate_800k0x16//800KBPS的预设值
+
+#defineBTR0_Rate_1000k0x00//1000KBPS的预设值
+
+#defineBTR1_Rate_1000k0x14//1000KBPS的预设值
+
+//命令字
+
+#defineTR_CMD0X01
+
+#defineAT_CMD0X02
+
+#defineRRB_CMD0X04
+
+#defineCOS_CMD0X08
+
+#defineGTS_CMD0X10
+
+//错误字
+
+#define CAN_INTERFACE_OK0
+
+#define CAN_BUS_OK0
+
+#define CAN_INTERFACE_ERR0XFF
+
+#define CAN_ENTERSET_ERR0XFE
+
+#define CAN_QUITSET_ERR0XFD
+
+#define CAN_INITOBJECT_ERR0XFC
+
+#define CAN_INITBTR_ERR0XFB
+
+#define CAN_INITOUTCTL_ERR0XFA
+
+#define CAN_INTCLKDIV_ERR0XF9
+
+#define CAN_BUS_ERR0XF8
+
+//系统指针，指向SJA1000
+
+unsigned char xdata *SJA_BCANAdr;
+
+unsigned char data Tmod_data;
+
+unsigned char run_lamp_flush_count = 0;
+
+unsigned char run_lamp_flush_time = 10;
+
+sbitrun_lamp = P1^1;
+
+unsigned char data send_data[10],rcv_data[10];
+
+unsigned int data rxbuffer[10]={REG_RxBuffer1,REG_RxBuffer2,REG_RxBuffer3,REG_RxBuffer4,REG_RxBuffer5,REG_RxBuffer6,REG_RxBuffer7,REG_RxBuffer8,REG_RxBuffer9,REG_RxBuffer10};
+
+unsigned int data txbuffer[10]={REG_TxBuffer1,REG_TxBuffer2,REG_TxBuffer3,REG_TxBuffer4,REG_TxBuffer5,REG_TxBuffer6,REG_TxBuffer7,REG_TxBuffer8,REG_TxBuffer9,REG_TxBuffer10};
+
+unsigned char bdata flag_init;
+
+sbit rcv_flag=flag_init^0;
+
+sbit err_flag=flag_init^0;
+
+sbit cs=P2^7;
+
+bit BCAN_CREAT_COMMUNATION(void)
+
+{SJA_BCANAdr=REG_TEST;
+
+*SJA_BCANAdr=0XAA;
+
+if(*SJA_BCANAdr==0XAA)
+
+{return 0;}
+
+else
+
+{return 1;}
+
+}
+
+bit BCAN_ENTER_RETMODEL(void)
+
+{
+
+unsigned char tempdata;
+
+SJA_BCANAdr=REG_CONTROL;
+
+tempdata=*SJA_BCANAdr;
+
+*SJA_BCANAdr=(tempdata|0x01);
+
+if(*SJA_BCANAdr&0X01==0X01)
+
+{return 0;}
+
+else
+
+{return 1;}
+
+}
+
+bit BCAN_QUIT_RETMODEL(void)
+
+{
+
+unsigned char tempdata;
+
+SJA_BCANAdr=REG_CONTROL;
+
+tempdata=*SJA_BCANAdr;
+
+*SJA_BCANAdr=(tempdata&0xFE);
+
+if(*SJA_BCANAdr&0X01==0X00)
+
+{return 0;}
+
+else
+
+{return 1;}
+
+}
+
+bit BCAN_SET_BANDRATE(unsigned char CAN_ByteRate)
+
+{
+
+unsigned char BR_Num= CAN_ByteRate,BTR0_num,BTR1_num;
+
+switch (BR_Num)
+
+{
+
+case ByteRate_40k:
+
+BTR0_num=0x87;
+
+BTR1_num=0xff;
+
+break;
+
+case ByteRate_50k:
+
+BTR0_num=0x47;
+
+BTR1_num=0x2f;
+
+break;
+
+case ByteRate_80k:
+
+BTR0_num=0x83;
+
+BTR1_num=0xff;
+
+break;
+
+case ByteRate_100k:
+
+BTR0_num=0x43;
+
+BTR1_num=0x2f;
+
+break;
+
+case ByteRate_200k:
+
+BTR0_num=0x81;
+
+BTR1_num=0xfa;
+
+break;
+
+case ByteRate_400k:
+
+BTR0_num=0x80;
+
+BTR1_num=0xfa;
+
+break;
+
+case ByteRate_500k:
+
+BTR0_num=0x01;
+
+BTR1_num=0x1c;
+
+break;
+
+case ByteRate_800k:
+
+BTR0_num=0x00;
+
+BTR1_num=0x16;
+
+break;
+
+case ByteRate_1000k:
+
+BTR0_num=0x00;
+
+BTR1_num=0x14;
+
+break;
+
+default :
+
+return 1;
+
+break;
+
+}
+
+SJA_BCANAdr=REG_BTR0;
+
+*SJA_BCANAdr=BTR0_num;
+
+if(*SJA_BCANAdr!=BTR0_num)
+
+{return 1;}
+
+SJA_BCANAdr=REG_BTR1;
+
+*SJA_BCANAdr=BTR1_num;
+
+if(*SJA_BCANAdr!=BTR1_num)
+
+{return 1;}
+
+return 0;
+
+}
+
+bit BCAN_SET_OBJECT(unsigned char BCAN_ACR,unsigned char BCAN_AMR)
+
+{
+
+SJA_BCANAdr=REG_ACR;
+
+*SJA_BCANAdr= BCAN_ACR;
+
+if(*SJA_BCANAdr!= BCAN_ACR)
+
+{return 1;}
+
+SJA_BCANAdr=REG_AMR;
+
+*SJA_BCANAdr= BCAN_AMR;
+
+if(*SJA_BCANAdr!= BCAN_AMR)
+
+{return 1;}
+
+return 0;
+
+}
+
+bit BCAN_SET_OUTCLK(unsigned char OUT_CONTROL,unsigned char CLOCK_OUT)
+
+{
+
+SJA_BCANAdr=REG_OCR;
+
+*SJA_BCANAdr= OUT_CONTROL;
+
+if(*SJA_BCANAdr!= OUT_CONTROL)
+
+{return 1;}
+
+SJA_BCANAdr=REG_CDR;
+
+*SJA_BCANAdr= CLOCK_OUT;
+
+if(*SJA_BCANAdr!= CLOCK_OUT)
+
+{return 1;}
+
+else
+
+return 0;
+
+}
+
+bit BCAN_DATA_WRITE(unsigned char *senddatabuf)
+
+{
+
+unsigned char tempcount,i;
+
+SJA_BCANAdr=REG_STATUS;
+
+if((*SJA_BCANAdr&0x08)==0)
+
+{return 1;}
+
+if((*SJA_BCANAdr&0x04)==0)
+
+{return 1;}
+
+SJA_BCANAdr=REG_TxBuffer1;
+
+if((senddatabuf[1]&0x10)==0)
+
+{tempcount=(senddatabuf[1]&0x0f)+2;}
+
+else
+
+{tempcount=2;}
+
+for (i=0;i<tempcount; i++)
+
+{
+
+SJA_BCANAdr=txbuffer[i];//发送区的地址区
+
+*SJA_BCANAdr=senddatabuf[i];
+
+}
+
+memcpy(SJA_BCANAdr,senddatabuf,tempcount);
+
+return 0;
+
+}
+
+bit BCAN_DATA_RECEIVE(unsigned char *RCVdatabuf)
+
+{
+
+unsigned char tempcount;
+
+SJA_BCANAdr=REG_STATUS;
+
+if((*SJA_BCANAdr&0x01)==0)
+
+{return 1;}
+
+SJA_BCANAdr=REG_RxBuffer2;
+
+if((*SJA_BCANAdr&0x10)==0)
+
+{tempcount=(*SJA_BCANAdr&0x0f)+2;}
+
+else
+
+{tempcount=2;}
+
+SJA_BCANAdr=REG_RxBuffer1;
+
+memcpy(RCVdatabuf,SJA_BCANAdr,tempcount);
+
+return 0;
+
+}
+
+bit BCAN_CMD_PGR(unsigned char cmd)
+
+{
+
+SJA_BCANAdr=REG_COMMAND;
+
+*SJA_BCANAdr= cmd;
+
+switch (cmd)
+
+{
+
+case TR_CMD:
+
+return 0;
+
+break;
+
+case AT_CMD:
+
+SJA_BCANAdr=REG_STATUS;
+
+if((*SJA_BCANAdr&0X20)==0)
+
+{return 0;}
+
+else
+
+{return 1;}
+
+break;
+
+case RRB_CMD:
+
+SJA_BCANAdr=REG_STATUS;
+
+if((*SJA_BCANAdr&0X01)==1)
+
+{return 1;}
+
+else
+
+{return 0;}
+
+break;
+
+case COS_CMD:
+
+SJA_BCANAdr=REG_STATUS;
+
+if((*SJA_BCANAdr&0X02)==0)
+
+{return 0;}
+
+else
+
+{return 1;}
+
+break;
+
+case GTS_CMD:
+
+return 0;
+
+break;
+
+default :
+
+return 1;
+
+break;
+
+}
+
+}
+
+void ex0_init(void) interrupt 0 using 1
+
+{
+
+SJA_BCANAdr=REG_INTERRUPT;
+
+flag_init=*SJA_BCANAdr;
+
+}
+
+void Init_Cpu( void )
+
+{
+
+PX0=1;
+
+IT0=1;
+
+EX0=1;
+
+ET0=1;
+
+EA=1;
+
+cs=0;
+
+}
+
+void Init_SJA( void )
+
+{
+
+BCAN_ENTER_RETMODEL();
+
+BCAN_SET_BANDRATE(8);
+
+BCAN_SET_OBJECT(0x00,0x00);
+
+BCAN_SET_OUTCLK(0xAA,0X48);
+
+BCAN_QUIT_RETMODEL();
+
+SJA_BCANAdr=REG_CONTROL;
+
+*SJA_BCANAdr|=0x1e;
+
+}
+
+void T0IN (void) interrupt 1 using 2
+
+{
+
+TR0=0;
+
+if(run_lamp_flush_count >= run_lamp_flush_time)
+
+{
+
+if(run_lamp)
+
+{run_lamp = 0;run_lamp_flush_time = 0; }
+
+else
+
+{run_lamp = 1;run_lamp_flush_time = 40; }
+
+run_lamp_flush_count = 0;
+
+}
+
+else
+
+run_lamp_flush_count++;
+
+TH0=0X4C;
+
+TL0=0X00;
+
+TR0=1;
+
+}
+
+void initt0(void)
+
+{
+
+Tmod_data=TMOD;
+
+Tmod_data&=0X0F;
+
+Tmod_data|=0x01;
+
+TMOD=Tmod_data;
+
+TH0=0X4C;
+
+TL0=0X00;
+
+TR0=1;
+
+}
+
+void main (void)
+
+{
+
+unsigned int delay;
+
+for(delay=0;delay<30000;delay++){; }// 复位延时
+
+initt0();
+
+Init_Cpu();
+
+cs=1;
+
+Init_SJA();
+
+flag_init=0X00;
+
+while (1)
+
+{
+
+if (rcv_flag)
+
+{
+
+rcv_flag=0;
+
+BCAN_DATA_RECEIVE(rcv_data);
+
+BCAN_CMD_PGR(0x04);
+
+}
+
+if(err_flag)
+
+{
+
+err_flag=0;
+
+Init_SJA();
+
+}
+
+}
+
+}
+
+

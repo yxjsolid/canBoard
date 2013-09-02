@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>礦ision2 Build Log</h1>
+<h2>Project:</h2>
+D:\SG-TOP808型CAN开发板全套资料new\SG-TOP808实验程序\单片机部分试验程序\3-UART试验SEND\UART.uv2
+Project File Date:  11/04/2008
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling UART.C...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?UART
+Program Size: data=61.1 xdata=0 code=401
+creating hex file from "UARTHEX"...
+"UARTHEX" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling UART.C...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?UART
+Program Size: data=61.1 xdata=0 code=405
+creating hex file from "UARTHEX"...
+"UARTHEX" - 0 Error(s), 1 Warning(s).

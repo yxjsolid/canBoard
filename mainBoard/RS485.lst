@@ -1,0 +1,198 @@
+C51 COMPILER V7.50   RS485                                                                 09/02/2013 03:18:52 PAGE 1   
+
+
+C51 COMPILER V7.50, COMPILATION OF MODULE RS485
+OBJECT MODULE PLACED IN .\RS485.obj
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE ..\common\RS485.c BROWSE DEBUG OBJECTEXTEND PRINT(.\RS485.lst) OBJECT(.\RS4
+                    -85.obj)
+
+line level    source
+
+   1          #include "stdio.h"
+   2          #include "string.h"
+   3          #include "reg51.h"
+   4          #include "RS485.h"
+   5          
+   6          
+   7          char ch;
+   8          
+   9          void serial_send_char(uint8 dataIn)
+  10          {
+  11   1              SBUF = dataIn;
+  12   1              while(!TI);
+  13   1              TI = 0;
+  14   1      }
+  15          void serial_send_data(uint8 *dataIn, uint8 size)
+  16          {
+  17   1              uint8 i = 0;
+  18   1              for( i = 0; i < size; i++)
+  19   1              {
+  20   2                      serial_send_char(*(dataIn + i));
+  21   2              }
+  22   1      }
+  23          
+  24          //$KA,XX,XX,XX,*
+  25          bit searchDataStartPattern(uint8 charIn)
+  26          {
+  27   1              static uint8 state = 0;
+  28   1              char *pattern = START_PATTERN;
+  29   1      
+  30   1              /*
+  31   1                      $: state == 1
+  32   1                      K: state == 2
+  33   1                      A: state == 3
+  34   1                      
+  35   1              */
+  36   1              switch(state)
+  37   1              {
+  38   2                      case 0: //no date
+  39   2                      {
+  40   3                              if (charIn == pattern[state])
+  41   3                              {
+  42   4                                      state = 1;
+  43   4                              }
+  44   3                              break;
+  45   3                      }
+  46   2      
+  47   2                      case 1: //'$' reveived, waiting 'K' 
+  48   2                      {
+  49   3                              if (charIn == pattern[state])
+  50   3                              {
+  51   4                                      state = 2;
+  52   4                              }
+  53   3                              else
+  54   3                              {
+C51 COMPILER V7.50   RS485                                                                 09/02/2013 03:18:52 PAGE 2   
+
+  55   4                                      state = 0;
+  56   4                              }
+  57   3                              break;
+  58   3                      }
+  59   2      
+  60   2                      case 2: //'$K' received, waiting 'A'
+  61   2                      {
+  62   3                              if (charIn == pattern[state])
+  63   3                              {
+  64   4                                      state = 3;
+  65   4                              }
+  66   3                              else
+  67   3                              {
+  68   4                                      state = 0;
+  69   4                              }
+  70   3                              break;
+  71   3                      }
+  72   2      
+  73   2                      default:
+  74   2                              /*never happen*/
+  75   2                              break;
+  76   2              }
+  77   1      
+  78   1              if (state == 3)
+  79   1              {
+  80   2                      state = 0;
+  81   2                      return 1;
+  82   2              }
+  83   1      
+  84   1              return 0;
+  85   1      }
+  86          
+  87          RS485DataStruct rsData;
+  88          uint8 rsDataReceive()
+  89          {
+  90   1              static bit frameFound = 0;
+  91   1              static uint8 frameLen = 0;
+  92   1              static uint8 dataIndex = 0;
+  93   1              uint8 isDataReady = 0;
+  94   1              uint8 *rsDataPtr = &rsData;
+  95   1      
+  96   1              if (!frameFound)
+  97   1              {
+  98   2                      frameFound = searchDataStartPattern(ch);
+  99   2                      frameLen = strlen(START_PATTERN);
+ 100   2              }
+ 101   1              else
+ 102   1              {
+ 103   2                      frameLen++;
+ 104   2      
+ 105   2                      if(searchDataStartPattern(ch))
+ 106   2                      {
+ 107   3                              frameLen = strlen(START_PATTERN);
+ 108   3                              dataIndex = 0;
+ 109   3                              return isDataReady;
+ 110   3                      }       
+ 111   2      
+ 112   2                      if (ch == SPLITER)
+ 113   2                      {
+ 114   3                              //SKIP
+ 115   3                      }
+ 116   2                      else
+C51 COMPILER V7.50   RS485                                                                 09/02/2013 03:18:52 PAGE 3   
+
+ 117   2                      {
+ 118   3                              if (dataIndex < sizeof(RS485DataStruct))
+ 119   3                              {
+ 120   4                                      rsDataPtr[dataIndex] = ch;
+ 121   4                              }
+ 122   3                              dataIndex++;
+ 123   3                      }
+ 124   2                      
+ 125   2                      if (frameLen == FRAME_SIZE)
+ 126   2                      {
+ 127   3                              if (ch == END_PATTERN)
+ 128   3                              {
+ 129   4                                      isDataReady = 1;
+ 130   4                              }
+ 131   3                              else
+ 132   3                              {
+ 133   4                                      /* frame error*/
+ 134   4                                      frameFound = 0;
+ 135   4                                      dataIndex = 0;
+ 136   4                                      frameLen = 0;   
+ 137   4                              }
+ 138   3                      }
+ 139   2              }
+ 140   1      
+ 141   1              return isDataReady;
+ 142   1      }
+ 143          
+ 144          void rsDataSend(RS485DataStruct *rsData)
+ 145          {
+ 146   1              uint8 idata buffer[48];
+ 147   1              uint8 index = 0;
+ 148   1              uint8 i = 0;
+ 149   1      
+ 150   1              strcpy(buffer, START_PATTERN);
+ 151   1              index += strlen(START_PATTERN);
+ 152   1      
+ 153   1              buffer[index++] = ',';
+ 154   1              for( i = 0; i < sizeof(RS485DataStruct); i++)
+ 155   1              {
+ 156   2                      buffer[index++] = ((uint8 *)rsData)[i];
+ 157   2                      if (i%2)
+ 158   2                      {
+ 159   3                              buffer[index++] = ',';
+ 160   3                      }
+ 161   2              }
+ 162   1      
+ 163   1              buffer[index++] = '*';
+ 164   1              serial_send_data(buffer, index);
+ 165   1      }
+ 166          
+ 167          
+ 168          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    380    ----
+   CONSTANT SIZE    =      4    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      8      14
+   IDATA SIZE       =   ----      48
+   BIT SIZE         =      1    ----
+C51 COMPILER V7.50   RS485                                                                 09/02/2013 03:18:52 PAGE 4   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
