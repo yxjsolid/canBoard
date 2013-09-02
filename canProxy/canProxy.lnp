@@ -1,4 +1,0 @@
-"STARTUP.obj",
-"canProxy.obj" 
-TO "canProxy" 
-RAMSIZE(256) 
