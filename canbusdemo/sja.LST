@@ -1,4 +1,4 @@
-C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 1   
+C51 COMPILER V7.50   SJA                                                                   09/03/2013 01:39:15 PAGE 1   
 
 
 C51 COMPILER V7.50, COMPILATION OF MODULE SJA
@@ -62,7 +62,7 @@ line level    source
   53          
   54          //***************************
   55          sbit rcv_flag=flag_init^0;
-C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 2   
+C51 COMPILER V7.50   SJA                                                                   09/03/2013 01:39:15 PAGE 2   
 
   56          sbit err_flag=flag_init^0;
   57          sbit CS=P2^0;
@@ -126,7 +126,7 @@ line level    source
  115   3           
  116   3           memcpy(RevceData,SJA_BCANAdr,length);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
  117   3      
-C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 3   
+C51 COMPILER V7.50   SJA                                                                   09/03/2013 01:39:15 PAGE 3   
 
  118   3      #if 0
                        display(cnt);//数码管显示 
@@ -190,7 +190,7 @@ line level    source
  175          *****************************************************/
  176          
  177          void main(void)
-C51 COMPILER V7.50   SJA                                                                   08/31/2013 20:51:49 PAGE 4   
+C51 COMPILER V7.50   SJA                                                                   09/03/2013 01:39:15 PAGE 4   
 
  178          {  
  179   1          unsigned char temptt,ss;

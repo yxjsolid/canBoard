@@ -7,6 +7,19 @@ D:\workspace\board\canbusdemo\sja.uv2
 Project File Date:  08/24/2013
 
 <h2>Output:</h2>
-</pre>
-</body>
-</html>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling sja.c...
+SJA.C(103): warning C280: 'cnt': unreferenced local variable
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_DELAY_S?SJA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_SET_CONTROL?SJA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_BCAN_DATA_WRITE?SJA
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SEND_STRING_COM?SJA
+Program Size: data=101.2 xdata=0 code=2025
+creating hex file from "sja1000"...
+"sja1000" - 0 Error(s), 5 Warning(s).
