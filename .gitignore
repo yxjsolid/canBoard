@@ -1,8 +1,9 @@
-/*
+/*/*
+*.bak
 
 # But not these files...
 !.gitignore
-!.c
+!*.c
 !*.h
 !*.Uv2
 !*.A51
