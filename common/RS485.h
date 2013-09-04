@@ -28,7 +28,7 @@ enum BoardStat
 	STAT_CMD_ERROR, //board return recieved cmd error
 
 	STAT_UNKNOWN,
-	STAT_MAX = 15;
+	STAT_MAX = 15
 };
 
 typedef struct BoardStatus
@@ -48,6 +48,6 @@ extern RS485DataStruct rsData;
 
 extern void serial_send_char(uint8 dataIn);
 extern void serial_send_data(uint8 *dataIn, uint8 size);
-extern void rsDataSend(RS485DataStruct *rsData);
+extern void rsDataSend(uint8 *rsData, int size);
 
 

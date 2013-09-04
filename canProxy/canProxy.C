@@ -1,26 +1,10 @@
 #include <reg51.h>
 #include <string.h>
+#include "../common/RS485.h"
 
 
-
-
+sbit key=P3^3; //Button按键
 bit read_flag = 0;
-
-//===================================================================================
-//	工程名称：	CAN总线收发一体程序
-//	功能描述：	利用CAN总线实现双向can语音传输
-
-//  IDE环境：   KEILC （or later）
-//	程序设计：	曙光单片机科技淘宝店
-//        
-//	组成文件：	main.c, FUNCTION.h,CAN.H
-//				
-//	硬件连接：  STC89C5X+SJA1000+CTM8251+AMBE1000	
-//
-//	维护记录：	2012-10-26	v1.0 
-//===================================================================================
-
-
 
 //向串口发送一个字符 
 void send_char_com(unsigned char ch)  
@@ -62,12 +46,12 @@ void init_serialcomm(void)
     TMOD &= 0x0f;
     TMOD |= 0x20;       //TMOD: timer 1, mode 2, 8-bit reload 
     PCON |= 0x80;       //SMOD=1; 
-    //TH1   = 0xFA;       //Baud:9600  fosc=11.0592MHz 
-    //TL1   = 0xFA;
+    TH1   = 0xFA;       //Baud:9600  fosc=11.0592MHz 
+    TL1   = 0xFA;
 
 
-	TH1   = 0xF4;       //Baud:4800  fosc=11.0592MHz 
-    TL1   = 0xF4;
+	//TH1   = 0xF4;       //Baud:4800  fosc=11.0592MHz 
+    //TL1   = 0xF4;
     IE   |= 0x90;       //Enable Serial Interrupt 
     TR1   = 1;          // timer 1 run 
     ET1  = 0;
@@ -88,28 +72,61 @@ void serial () interrupt 4 using 1
 		read_flag=1;
     }
 }
+
+void delay10ms(void) //延时程序
+{
+      unsigned char i,j;
+      for(i=20;i>0;i--)
+      for(j=248;j>0;j--);
+}
+
+uint8 testData[8]={'a','b','c','d','e','f','g','h'};
+
 #if 1
 void  main()
 {
-    init_serialcomm();  //初始化串口 
-    read_flag=0;
-    while(1)
+	init_serialcomm();  //初始化串口
+	read_flag=0;
+
+	while(1)
     {
-          if(read_flag)  //如果取数标志已置位，就将读到的数从串口发出 
-          {
-               read_flag=0; //取数标志清0 
-               //ES = 0;
-			     send_char_com(0x00);
-			     send_char_com(0x01);
-			     send_char_com(0x02);
-			     send_char_com(0x03);
-			     send_char_com(0x04);
-			     send_char_com(0x05);
-			     send_char_com(0x06);
-			     send_char_com(0x08);
-				  //ES = 1;
- 
-          }
+		if(read_flag)  //如果取数标志已置位，就将读到的数从串口发出 
+		{
+		   read_flag=0; //取数标志清0 
+		   //ES = 0;
+		     send_char_com(0x00);
+		     send_char_com(0x01);
+		     send_char_com(0x02);
+		     send_char_com(0x03);
+		     send_char_com(0x04);
+		     send_char_com(0x05);
+		     send_char_com(0x06);
+		     send_char_com(0x08);
+			  //ES = 1;
+
+		}
+		
+		if(key == 0) 
+		{
+			delay10ms();
+			while(key==0);
+
+			send_char_com(0x01);
+
+			rsDataSend(&(testData), 8);
+		#if 1
+			//send_char_com(0x01);
+			send_char_com(0x02);
+			send_char_com(0x03);
+			send_char_com(0x03);
+			send_char_com(0x04);
+			send_char_com(0x05);
+			send_char_com(0x06);
+			send_char_com(0x08);
+			#endif
+		}
+
+		  
     }
 
 }

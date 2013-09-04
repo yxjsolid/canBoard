@@ -141,7 +141,7 @@ uint8 rsDataReceive()
 	return isDataReady;
 }
 
-void rsDataSend(RS485DataStruct *rsData)
+void rsDataSend(uint8 *rsData, int size)
 {
 	uint8 idata buffer[48];
 	uint8 index = 0;
@@ -151,7 +151,7 @@ void rsDataSend(RS485DataStruct *rsData)
 	index += strlen(START_PATTERN);
 
 	buffer[index++] = ',';
-	for( i = 0; i < sizeof(RS485DataStruct); i++)
+	for( i = 0; i < size; i++)
 	{
 		buffer[index++] = ((uint8 *)rsData)[i];
 		if (i%2)

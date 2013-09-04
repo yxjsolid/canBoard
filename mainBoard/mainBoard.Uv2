@@ -32,7 +32,7 @@ Options 1,0,0  // Target 'Target 1'
  EnvLib ()
  EnvReg (ÿAtmel\)
  OrgReg (ÿAtmel\)
- TgStat=9
+ TgStat=0
  OutDir (.\)
  OutName (mainBoard)
  GenApp=1
