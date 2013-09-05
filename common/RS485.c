@@ -33,6 +33,7 @@ bit searchDataStartPattern(uint8 charIn)
 		A: state == 3
 		
 	*/
+
 	switch(state)
 	{
 		case 0: //no date
@@ -46,6 +47,7 @@ bit searchDataStartPattern(uint8 charIn)
 
 		case 1: //'$' reveived, waiting 'K' 
 		{
+
 			if (charIn == pattern[state])
 			{
 				state = 2;
@@ -85,46 +87,46 @@ bit searchDataStartPattern(uint8 charIn)
 }
 
 RS485DataStruct rsData;
-uint8 rsDataReceive()
+uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 {
 	static bit frameFound = 0;
 	static uint8 frameLen = 0;
 	static uint8 dataIndex = 0;
 	uint8 isDataReady = 0;
-	uint8 *rsDataPtr = &rsData;
+	uint8 *rsDataPtr = buf;
 
 	if (!frameFound)
 	{
-		frameFound = searchDataStartPattern(ch);
+		frameFound = searchDataStartPattern(chIn);
 		frameLen = strlen(START_PATTERN);
 	}
 	else
 	{
 		frameLen++;
 
-		if(searchDataStartPattern(ch))
+		if(searchDataStartPattern(chIn))
 		{
 			frameLen = strlen(START_PATTERN);
 			dataIndex = 0;
 			return isDataReady;
 		}	
 
-		if (ch == SPLITER)
+		if (chIn == SPLITER)
 		{
 			//SKIP
 		}
 		else
 		{
-			if (dataIndex < sizeof(RS485DataStruct))
+			if (dataIndex < bufSize)
 			{
-				rsDataPtr[dataIndex] = ch;
+				rsDataPtr[dataIndex] = chIn;
 			}
 			dataIndex++;
 		}
 		
-		if (frameLen == FRAME_SIZE)
+		if (frameLen == FRAME_SIZE(bufSize))
 		{
-			if (ch == END_PATTERN)
+			if (chIn == END_PATTERN)
 			{
 				isDataReady = 1;
 			}
@@ -141,7 +143,7 @@ uint8 rsDataReceive()
 	return isDataReady;
 }
 
-void rsDataSend(uint8 *rsData, int size)
+void rsDataSend(uint8 *rsDataIn, int size)
 {
 	uint8 idata buffer[48];
 	uint8 index = 0;
@@ -153,13 +155,18 @@ void rsDataSend(uint8 *rsData, int size)
 	buffer[index++] = ',';
 	for( i = 0; i < size; i++)
 	{
-		buffer[index++] = ((uint8 *)rsData)[i];
+		buffer[index++] = ((uint8 *)rsDataIn)[i];
 		if (i%2)
 		{
 			buffer[index++] = ',';
 		}
 	}
 
+	if (size%2)
+	{
+		buffer[index++] = ',';
+	}
+	
 	buffer[index++] = '*';
 	serial_send_data(buffer, index);
 }

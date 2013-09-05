@@ -7,6 +7,8 @@ Group (Source Group 1)
 
 File 1,2,<.\STARTUP.A51><STARTUP.A51> 0x0 
 File 1,1,<.\canProxy.C><canProxy.C> 0x0 
+File 1,1,<..\common\canData.c><canData.c> 0x0 
+File 1,1,<..\common\RS485.c><RS485.c> 0x0 
 
 
 Options 1,0,0  // Target 'Target 1'

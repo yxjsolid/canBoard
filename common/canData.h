@@ -1,6 +1,4 @@
-
-typedef unsigned char uint8;
-
+#include "types.h"
 
 
 #define GET_DATA_SIZE(x)	(((x)->info)&0x0f)
@@ -35,5 +33,5 @@ enum CMD_ID
 };
 
 
-
+extern canFrameStruct canData;
 

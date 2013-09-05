@@ -1,29 +1,18 @@
 #include <reg51.h>
 #include <string.h>
-#include "../common/RS485.h"
 
+#include "../common/types.h"
+#include "../common/RS485.h"
+#include "../common/canData.h"
 
 sbit key=P3^3; //Button按键
-bit read_flag = 0;
+bit isRsDataRecived = 0;
+bit isMsgReceived = 0;
+uint8 ch_recv = 0;
 
-//向串口发送一个字符 
-void send_char_com(unsigned char ch)  
-{
-    SBUF=ch;
-    while(!TI);
-    TI=0;
-}
+uint8 inBuffer[28];
+uint8 inDataSize = 0;
 
-//向串口发送一个字符串，strlen为该字符串长度 
-void send_string_com(unsigned char *str,unsigned int strlen)
-{
-    unsigned int k=0;
-    do 
-    {
-        send_char_com(*(str + k));
-        k++;
-    } while(k < strlen);
-}
 
 //***************************************************
 
@@ -66,10 +55,12 @@ void serial () interrupt 4 using 1
 {
     if(RI)
     {
-		unsigned char ch;
         RI = 0;
-        ch=SBUF;
-		read_flag=1;
+        ch_recv = SBUF;
+		isRsDataRecived = 1;
+
+		inBuffer[inDataSize] = ch_recv;
+		inDataSize++;
     }
 }
 
@@ -85,25 +76,60 @@ uint8 testData[8]={'a','b','c','d','e','f','g','h'};
 #if 1
 void  main()
 {
+	int i = 0;
 	init_serialcomm();  //初始化串口
-	read_flag=0;
+	
+	isRsDataRecived = 0;
+
+
 
 	while(1)
     {
-		if(read_flag)  //如果取数标志已置位，就将读到的数从串口发出 
+		if(isRsDataRecived)
 		{
-		   read_flag=0; //取数标志清0 
-		   //ES = 0;
-		     send_char_com(0x00);
-		     send_char_com(0x01);
-		     send_char_com(0x02);
-		     send_char_com(0x03);
-		     send_char_com(0x04);
-		     send_char_com(0x05);
-		     send_char_com(0x06);
-		     send_char_com(0x08);
-			  //ES = 1;
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			delay10ms();
+			
+		
+			isRsDataRecived = 0;
 
+
+
+			serial_send_data(inBuffer, inDataSize);
+
+			
+#if 1			
+			serial_send_char('!');
+			for (i = 0; i < inDataSize; i++)
+			{
+
+				
+				if ( rsDataReceive(inBuffer[i], &canData, sizeof(canData)))
+				{	
+					serial_send_char('o');
+					serial_send_char('k');
+					serial_send_char('\n');
+
+					serial_send_char('#');
+					rsDataSend(&(canData), sizeof(canData));
+				}
+				else
+				{
+					serial_send_char(0x02);
+				}
+			}
+
+			serial_send_char('\n');
+
+			inDataSize = 0;
+#endif			
 		}
 		
 		if(key == 0) 
@@ -111,18 +137,18 @@ void  main()
 			delay10ms();
 			while(key==0);
 
-			send_char_com(0x01);
+			serial_send_char(0x01);
 
 			rsDataSend(&(testData), 8);
 		#if 1
 			//send_char_com(0x01);
-			send_char_com(0x02);
-			send_char_com(0x03);
-			send_char_com(0x03);
-			send_char_com(0x04);
-			send_char_com(0x05);
-			send_char_com(0x06);
-			send_char_com(0x08);
+			serial_send_char(0x02);
+			serial_send_char(0x03);
+			serial_send_char(0x03);
+			serial_send_char(0x04);
+			serial_send_char(0x05);
+			serial_send_char(0x06);
+			serial_send_char(0x08);
 			#endif
 		}
 

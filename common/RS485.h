@@ -1,11 +1,11 @@
-typedef unsigned char uint8;
+#include "types.h"
 
 //$KA,XX,XX,XX,*
 #define START_PATTERN "$KA"
 #define END_PATTERN	'*'
 #define SPLITER	','
 #define DATA_SIZE	(sizeof(RS485DataStruct))
-#define FRAME_SIZE (5+ DATA_SIZE/2 + DATA_SIZE%2 + DATA_SIZE)
+#define FRAME_SIZE(x) (5 + x + x/2 + x%2)
 
 typedef struct RS485DataStruct
 {	
@@ -45,9 +45,12 @@ typedef struct BoardStatus
 
 
 extern RS485DataStruct rsData;
-
 extern void serial_send_char(uint8 dataIn);
 extern void serial_send_data(uint8 *dataIn, uint8 size);
-extern void rsDataSend(uint8 *rsData, int size);
+
+
+extern uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize);
+extern void rsDataSend(uint8 *rsDataIn, int size);
+
 
 
