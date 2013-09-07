@@ -4,8 +4,19 @@
 #include "../common/types.h"
 #include "../common/RS485.h"
 #include "../common/canData.h"
+#include "../common/sja.h"
 
-sbit key=P3^3; //Button按键
+uint8 xdata *SJA_BaseAdr = 0X7F00;
+
+sbit key1=P3^3; //Button按键
+sbit key2=P3^4; //Button按键
+sbit key3=P3^5; //Button按键
+
+sbit P2_0=P2^0;//数码管位选
+sbit P2_1=P2^1;
+sbit P2_2=P2^2;//数码管位选
+sbit P2_3=P2^3;
+
 bit isRsDataRecived = 0;
 bit isMsgReceived = 0;
 uint8 ch_recv = 0;
@@ -13,6 +24,54 @@ uint8 ch_recv = 0;
 uint8 inBuffer[28];
 uint8 inDataSize = 0;
 
+uint8 code testData[8]={'a','b','c','d','e','f','g','h'};
+uint8 code table[]={0xC0,0xF9,0xA4,0xB0,0x99,0x92,0x82,0xF8,0x80,0x90,0x88,0x83,0xc6,0xa1,0x86,0x8e};
+void display(unsigned char num)  // 显示子函数
+{
+	P2_0 = 0;
+	P2_1 = 0;
+	P2_2 = 0;
+	P2_3 = 0;
+	P1=table[num];
+}
+
+
+void ex0_int(void) interrupt 0 using 1
+{
+	unsigned char tt,length,i;
+	unsigned char xdata *canAddr;
+	static int cnt = 1;
+ 
+	canAddr = REG_INTERRUPT;
+
+	if((*canAddr)&0x01)                   //产生了接收中断
+	{  
+		canAddr = REG_RXBuffer1;
+		tt=*canAddr;
+		length=tt&0x0F;
+
+
+		
+		if ((tt&0x40)!=0x40)                   //数据帧   = 为远程帧
+		{  
+			if (tt&0x80)  //eff
+			{
+				canAddr = REG_RXBuffer6;
+			}
+			else //sff
+			{
+				canAddr = REG_RXBuffer4;
+			}
+			serial_send_char(*canAddr);
+			//emcpy(RevceData,canAddr,length);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
+
+			display((*canAddr)%16);
+
+		}
+
+		BCAN_CMD_PRG(RRB_CMD);                  //释放SJA1000接收缓冲区，****已经修改
+	}
+} 
 
 //***************************************************
 
@@ -29,24 +88,8 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 }
 
 
-void init_serialcomm(void)
-{
-    SCON  = 0x50;       //SCON: serail mode 1, 8-bit UART, enable ucvr
-    TMOD &= 0x0f;
-    TMOD |= 0x20;       //TMOD: timer 1, mode 2, 8-bit reload 
-    PCON |= 0x80;       //SMOD=1; 
-    TH1   = 0xFA;       //Baud:9600  fosc=11.0592MHz 
-    TL1   = 0xFA;
 
 
-	//TH1   = 0xF4;       //Baud:4800  fosc=11.0592MHz 
-    //TL1   = 0xF4;
-    IE   |= 0x90;       //Enable Serial Interrupt 
-    TR1   = 1;          // timer 1 run 
-    ET1  = 0;
-    //EA = 1;
-   // TI=1; 
-}
 
 
 
@@ -71,21 +114,40 @@ void delay10ms(void) //延时程序
       for(j=248;j>0;j--);
 }
 
-uint8 testData[8]={'a','b','c','d','e','f','g','h'};
 
-#if 1
 void  main()
 {
 	int i = 0;
-	init_serialcomm();  //初始化串口
+	uint8 num;
+	Init_Cpu();
+	init_serialcomm(RS_Baudrate_4800, OSCILLA_FREQ_11M);  //初始化串口
 	
 	isRsDataRecived = 0;
 
+	serial_send_string("start\n");
 
+
+	if ( Sja_1000_Init(OSCILLA_FREQ_16M))
+	{
+		serial_send_char(0xee);
+	}
+	else
+	{
+		EA = 1;
+	}
+
+
+	display(10);
+	serial_send_string("begin\n");
+
+	
 
 	while(1)
     {
-		if(isRsDataRecived)
+
+#if 0	
+		//if(isRsDataRecived)
+		if(0)
 		{
 			delay10ms();
 			delay10ms();
@@ -131,14 +193,37 @@ void  main()
 			inDataSize = 0;
 #endif			
 		}
-		
-		if(key == 0) 
+#endif
+		if(key1 == 0) 
 		{
 			delay10ms();
-			while(key==0);
+			while(key1==0);
 
 			serial_send_char(0x01);
 
+			num=num+1;if(num==16) num=0;
+			//CAN_Send_onebyte(num,1);
+
+			CAN_Send_Data(num);
+			
+			display(num); 
+        	delay10ms();
+			SJA_BCANAdr = REG_STATUS;
+
+			serial_send_char(0x02);
+         
+     		delay10ms();
+			delay10ms();
+			delay10ms();
+			if ((*SJA_BCANAdr&0x40)==0x40)
+			{
+
+				serial_send_char(0xee);
+				Sja_1000_Init();
+				
+			}
+
+			serial_send_char(0x01);
 			rsDataSend(&(testData), 8);
 		#if 1
 			//send_char_com(0x01);
@@ -149,61 +234,11 @@ void  main()
 			serial_send_char(0x05);
 			serial_send_char(0x06);
 			serial_send_char(0x08);
-			#endif
+		#endif
 		}
-
 		  
     }
 
 }
-
-#else
-
-/****************************************************
-**函数原型：   void main(void)
-**功    能：   主程序部分:
-**入口参数:    无 
-**返 回 值:     
-*****************************************************/
-
-void main(void)
-{  
-	IE = 0;
-	//Init_Cpu();  
-	init_serialcomm();     //初始化串口 
-	//timer0initial();       //定时器0初始化
-  
-
-#if 0
-	ss=Sja_1000_Init();
-	if (ss!=0)             //初始化失败
-	//send_string_com("init fail!");**********************
-	send_char_com(0xBB);              //测试专用发送到串口看状态   
-	else
-	EA=1; //初始化成功，开总中断
-#endif
-
-//次标识位可以作为，串口接收完，置标志然后发送出去或者当作按键发送******
-	while(1) 
-	{ 
-		if(read_flag)  //如果取数标志已置位，就将读到的数从串口发出 
-		{
-			read_flag=0; //取数标志清0 
-			//ES = 0;
-			send_char_com(0x00);
-			send_char_com(0x01);
-			send_char_com(0x02);
-			send_char_com(0x03);
-			send_char_com(0x04);
-			send_char_com(0x05);
-			send_char_com(0x06);
-			send_char_com(0x08);
-			//ES = 1;
-		}
-	}   
-
-}
-
-#endif
 
 

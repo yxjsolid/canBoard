@@ -3,8 +3,54 @@
 #include "reg51.h"
 #include "RS485.h"
 
+void init_serialcomm(uint8 baudRate, uint8 freq)
+{
+    SCON  = 0x50;       //SCON: serail mode 1, 8-bit UART, enable ucvr
+    TMOD &= 0x0f;
+    TMOD |= 0x20;       //TMOD: timer 1, mode 2, 8-bit reload 
+    PCON |= 0x80;       //SMOD=1; 
 
-char ch;
+
+	switch(baudRate)
+	{
+		case RS_Baudrate_4800:
+		{
+
+			if ( OSCILLA_FREQ_11M == freq )
+			{
+				TH1   = 0xF4;
+   			 	TL1   = 0xF4;
+			}
+			else if ( OSCILLA_FREQ_12M == freq )
+			{
+				TH1   = 0xF3;
+				TL1   = 0xF3;
+			}
+		}
+			break;
+
+		case RS_Baudrate_9600:
+		{
+			if ( OSCILLA_FREQ_11M == freq )
+			{
+				TH1   = 0xFA;
+				TL1   = 0xFA;
+			}
+			else if ( OSCILLA_FREQ_12M == freq )
+			{
+				// tobe determined
+			}
+		}
+			break;
+			
+	}
+
+    IE   |= 0x90;       //Enable Serial Interrupt 
+    TR1   = 1;          // timer 1 run 
+    ET1  = 0;
+}
+
+
 
 void serial_send_char(uint8 dataIn)
 {
@@ -12,6 +58,7 @@ void serial_send_char(uint8 dataIn)
 	while(!TI);
 	TI = 0;
 }
+
 void serial_send_data(uint8 *dataIn, uint8 size)
 {
 	uint8 i = 0;
@@ -19,6 +66,11 @@ void serial_send_data(uint8 *dataIn, uint8 size)
 	{
 		serial_send_char(*(dataIn + i));
 	}
+}
+
+void serial_send_string(uint8 *strIn)
+{
+	serial_send_data(strIn, strlen(strIn));
 }
 
 //$KA,XX,XX,XX,*

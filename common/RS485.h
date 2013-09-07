@@ -1,5 +1,12 @@
 #include "types.h"
 
+#define RS_Baudrate_4800 1
+#define RS_Baudrate_9600 2
+
+
+
+
+
 //$KA,XX,XX,XX,*
 #define START_PATTERN "$KA"
 #define END_PATTERN	'*'
@@ -45,8 +52,11 @@ typedef struct BoardStatus
 
 
 extern RS485DataStruct rsData;
+
+extern void init_serialcomm(uint8 baudRate, uint8 freq);
 extern void serial_send_char(uint8 dataIn);
 extern void serial_send_data(uint8 *dataIn, uint8 size);
+extern void serial_send_string(uint8 *strIn);
 
 
 extern uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize);
