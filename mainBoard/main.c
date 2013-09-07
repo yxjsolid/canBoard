@@ -9,15 +9,10 @@
 void CAN_Send_anylength(unsigned char *CAN_TX_Buf,unsigned char length1);
 //定义SJA1000的基址
 unsigned char xdata *SJA_BaseAdr = 0XFE00;
-
-
-
 unsigned char data RevceData[13];
 
 
 //*************************
-
-
 sbit P10=P1^0;
 sbit P11=P1^1;
 sbit P12=P1^2;
@@ -43,9 +38,6 @@ void rs485SetModeTx(void);
 
 void send_something(unsigned char CAN_TX_data)
 {
-
-	
-
 	rs485SetModeTx();
 
 	SBUF=0xee;
@@ -73,96 +65,10 @@ void send_something(unsigned char CAN_TX_data)
 
 	rs485SetModeRx();
 }
-
-/****************************************************
-**函数原型：  void ex0_int(void) interrupt 0 //using 1
-**功    能：  中断接收函数
-**入口参数:   无 
-**出口参数:   RevceData[]数组   
-**说    明:   当sja1000 收到正确的报文时,会产生int中断           
-*****************************************************/
-#if 0
-void ex0_int(void) interrupt 0 using 1
-{  
-	unsigned char tt,length,i;
-
-
-	rs485SetModeTx();
-
-	SBUF=0x1;
-	while(!TI);
-	TI=0;
-	
-	SJA_BCANAdr = REG_INTENABLE;
-	SBUF=(*SJA_BCANAdr);
-	while(!TI);
-	TI=0;
- 	rs485SetModeRx();
-
-
-
-	SJA_BCANAdr=REG_INTERRUPT;
-
-
-	
-
-	if((*SJA_BCANAdr)&0x01)                   //产生了接收中断
-	{  
-		SJA_BCANAdr=REG_RXBuffer1;
-		tt=*SJA_BCANAdr;
-		length=tt&0x0F;
-		if ((tt&0x40)!=0x40)                   //数据帧   = 为远程帧
-		{  
-			SJA_BCANAdr =REG_RXBuffer4 ;           //宏定义的变量不能memcpy(RevceData,REG_RXBuffer4,8); 
-			//SJA_BCANAdr = REG_RXBuffer1 ;
-
-			//memcpy(RevceData,SJA_BCANAdr,13);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
-			//memcpy(Com_RecBuff,RevceData,8);      //测试用的主要是把接收到的数据在发出去，验证数据的正确
-			                                //以下代码是发送到串
-
-			send_something(*(SJA_BCANAdr));
-			
-			//for(i=0;i<13;i++)
-			//send_something(RevceData[i]);
-
-
-		}
-
-
-		rs485SetModeTx();
-
-		SBUF=0x2;
-		while(!TI);
-		TI=0;
-
-		SJA_BCANAdr = REG_INTENABLE;
-		SBUF=(*SJA_BCANAdr);
-		while(!TI);
-		TI=0;
-		rs485SetModeRx();
-
-		BCAN_CMD_PRG(RRB_CMD);                  //释放SJA1000接收缓冲区，****已经修改
-	}
-
-	rs485SetModeTx();
-
-	SBUF=0x3;
-	while(!TI);
-	TI=0;
-		
-	SJA_BCANAdr = REG_INTENABLE;
-	SBUF=(*SJA_BCANAdr);
-	while(!TI);
-	TI=0;
- 	rs485SetModeRx();
-} 
-#endif
-
 void ex0_int(void) interrupt 0 using 1
 {  
 	unsigned char tt,length,i;
 	SJA_BCANAdr=REG_INTERRUPT;
-
 
 	if((*SJA_BCANAdr)&0x01)                   //产生了接收中断
 	{  
@@ -229,11 +135,6 @@ void Sja_test(unsigned char CAN_TX_data)
 		while(!TI);
 		TI=0;
 	}
-
-
-	
-
-
 	
 	if ((temptt&0x40)==0x40)                     //读错误状态
 	{  
@@ -263,9 +164,6 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 	PX0=0;
 	IT0=0; // TCON set EXC0 trigge mode
 	// EA=1;
-
-
-
 	//EX0=1;
 }
 
@@ -299,33 +197,6 @@ void serial() interrupt 4
 	flag=1;
 	RI=0;
 }
-#if 0
-/************************************************************************
-*函数原型: void init_serialcomm(void)            *
-*参数说明: 串口初始化                            *                                                             *
-*说明:     设值单片机的定时器1的方式选择波特率 。该子程序只能用于复位模式                      
-************************************************************************/
-void init_serialcomm(void)
-{
-#if 1
-	SCON  = 0x50;       //SCON: serail mode 1, 8-bit UART, enable ucvr 
-    TMOD |= 0x20;       //TMOD: timer 1, mode 2, 8-bit reload 
-    PCON |= 0x80;       //SMOD=1; 
-    TH1   = 0xF3;       //Baud:4800  fosc=12MHz  
-    TL1   = 0xF3;       //baud:4800
-
-	//TH1   = 0xF4;       //Baud:4800  fosc=11.0592MHz  
-    //TL1   = 0xF4;       //baud:4800
-
-	//TH1   = 0xF9;       //Baud:9600  fosc=12MHz  
-    //TL1   = 0xF9;       //baud:9600     
-    IE   |= 0x90;       //Enable Serial Interrupt 
-    TR1   = 1;          // timer 1 run 
-#endif
-
-	//ES=1;
-}
-#endif
 
 void setTimer(void)
 {
