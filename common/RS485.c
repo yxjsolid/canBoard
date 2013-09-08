@@ -3,6 +3,8 @@
 #include "reg51.h"
 #include "RS485.h"
 
+RS485DataStruct rsData;
+
 void init_serialcomm(uint8 baudRate, uint8 freq)
 {
     SCON  = 0x50;       //SCON: serail mode 1, 8-bit UART, enable ucvr
@@ -138,7 +140,6 @@ bit searchDataStartPattern(uint8 charIn)
 	return 0;
 }
 
-RS485DataStruct rsData;
 uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 {
 	static bit frameFound = 0;
@@ -147,10 +148,18 @@ uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 	uint8 isDataReady = 0;
 	uint8 *rsDataPtr = buf;
 
+	//sendTest(0x1);
+
 	if (!frameFound)
 	{
+		//sendTest(0x2);
+	
 		frameFound = searchDataStartPattern(chIn);
-		frameLen = strlen(START_PATTERN);
+		//sendTest(0x3);
+		//frameLen = strlen(START_PATTERN);
+		frameLen = 3;
+	
+		//sendTest(0x4);
 	}
 	else
 	{
@@ -158,7 +167,8 @@ uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 
 		if(searchDataStartPattern(chIn))
 		{
-			frameLen = strlen(START_PATTERN);
+			//frameLen = strlen(START_PATTERN);
+			frameLen = 3;
 			dataIndex = 0;
 			return isDataReady;
 		}	
@@ -192,34 +202,35 @@ uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 		}
 	}
 
+	//sendTest(0x5);
 	return isDataReady;
 }
 
 void rsDataSend(uint8 *rsDataIn, int size)
 {
-	uint8 idata buffer[48];
+	uint8 idata buffer[30];
 	uint8 index = 0;
 	uint8 i = 0;
 
 	strcpy(buffer, START_PATTERN);
 	index += strlen(START_PATTERN);
 
-	buffer[index++] = ',';
+	buffer[index++] = SPLITER;
 	for( i = 0; i < size; i++)
 	{
 		buffer[index++] = ((uint8 *)rsDataIn)[i];
 		if (i%2)
 		{
-			buffer[index++] = ',';
+			buffer[index++] = SPLITER;
 		}
 	}
 
 	if (size%2)
 	{
-		buffer[index++] = ',';
+		buffer[index++] = SPLITER;
 	}
 	
-	buffer[index++] = '*';
+	buffer[index++] = END_PATTERN;
 	serial_send_data(buffer, index);
 }
 

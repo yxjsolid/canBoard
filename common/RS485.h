@@ -4,15 +4,13 @@
 #define RS_Baudrate_9600 2
 
 
-
-
-
 //$KA,XX,XX,XX,*
 #define START_PATTERN "$KA"
 #define END_PATTERN	'*'
 #define SPLITER	','
-#define DATA_SIZE	(sizeof(RS485DataStruct))
+#define RSDATA_SIZE	(sizeof(RS485DataStruct))
 #define FRAME_SIZE(x) (5 + x + x/2 + x%2)
+#define RSDATA_FRAME_SIZE FRAME_SIZE(RSDATA_SIZE)
 
 typedef struct RS485DataStruct
 {	
@@ -21,9 +19,6 @@ typedef struct RS485DataStruct
 	uint8 cmd;
 	uint8 rsData;
 }RS485DataStruct;
-
-
-
 
 
 enum BoardStat
@@ -45,10 +40,13 @@ typedef struct BoardStatus
 		  lastTicket:4;
 }BoardStatus;
 
-
-
-
-
+typedef enum rs_state
+{
+	RS_IDLE = 0,
+	RS_READY_TO_SEND,
+	RS_WAIT_REPLY,
+	RS_REPLY_RECV
+}rs_state;
 
 
 extern RS485DataStruct rsData;
@@ -57,10 +55,7 @@ extern void init_serialcomm(uint8 baudRate, uint8 freq);
 extern void serial_send_char(uint8 dataIn);
 extern void serial_send_data(uint8 *dataIn, uint8 size);
 extern void serial_send_string(uint8 *strIn);
-
-
 extern uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize);
 extern void rsDataSend(uint8 *rsDataIn, int size);
-
-
+extern  bit searchDataStartPattern(uint8 charIn);
 

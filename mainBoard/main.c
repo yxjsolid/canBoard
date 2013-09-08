@@ -28,6 +28,9 @@ sbit P34=P3^4;
 
 sbit CS=P2^0;
 
+int timerTicket = 0;
+
+
 BoardStatus idata OutPutBoard[16];
 BoardStatus idata InPutBoard[16];
 
@@ -175,6 +178,7 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 *****************************************************/
 unsigned char a;
 bit flag = 0;
+bit rsFrameReceived = 0;
 
 void rs485SetModeRx()
 {
@@ -189,13 +193,22 @@ void rs485SetModeTx()
 }
 
 unsigned char num = 0;
+uint8 inBuffer[RSDATA_FRAME_SIZE];
 
 void serial() interrupt 4
 {
+
 	num++;
-	a=SBUF;
-	flag=1;
-	RI=0;
+	a = SBUF;
+	flag = 1;
+	RI = 0;
+	
+	rsFrameReceived = 0;
+	if (rsDataReceive(a, &rsData, sizeof(RS485DataStruct)))
+	{
+		rsFrameReceived = 1;
+		rs485SetModeTx();//disable serial interrupt
+	}
 }
 
 void setTimer(void)
@@ -220,23 +233,23 @@ void timer0initial()
 //定时器0中断,不够8个就在此发送
 void time_intt0(void) interrupt 1 using 2
 {
-	static unsigned char timer_flag = 0;
+	//static unsigned char timer_flag = 0;
 	static unsigned char timer_count = 0;
 	setTimer();
 	if (timer_count == 4)
 	{
-		timer_flag = !timer_flag;
-		//P35=timer_flag;
-		//P10=timer_flag;
+		//timer_flag = !timer_flag;
+		//P10 = timer_flag;
 
-		P10 = timer_flag;
-
+		P10 = !P10;
 		timer_count = 0;
 	}
 	else
 	{
 		timer_count++;
 	}
+
+	timerTicket++;
 
 }
 
@@ -267,10 +280,119 @@ void delay_s(unsigned char t)
 	unsigned int i,j;
 	for(i=0;i<t;i++)
 	{
-		for(j=0;j<0xffff;j++)
-			;
+		for(j=0;j<0xffff;j++);
 	}
 }
+
+
+
+
+enum opera_state
+{
+	OP_STAT_IDLE = 0,
+	OP_STAT_CMD_RECV,
+	OP_STAT_CMD_HANDLE,
+	OP_STAT_CMD_REPLY,
+};
+	
+uint8 OPERA_STATE = OP_STAT_IDLE;
+
+
+void stateMachine(uint8 state)
+{
+	switch(state)
+	{
+		case OP_STAT_IDLE:
+		{
+
+		}
+			break;
+
+		case OP_STAT_CMD_RECV:
+		{
+
+		}
+			break;
+
+		case OP_STAT_CMD_HANDLE:
+		{
+
+		}
+			break;
+
+		case OP_STAT_CMD_REPLY:
+		{
+
+		}
+			break;
+	}
+}
+
+
+rs_state rsState = RS_IDLE;
+
+void rs485StateMachine(int ticketIn)
+{
+	static int lastTicket = 0;
+	int ticketTmp = 0;
+	
+	switch(rsState)
+	{
+		case RS_IDLE:
+		{
+
+		}
+			break;
+
+		case RS_READY_TO_SEND:
+		{	
+			rs485SetModeTx();
+			rsData.boartType = 0xf1;
+			rsData.boardId = 0xf2;
+			rsData.cmd = 0xf3;
+			rsData.rsData = 0xf4;
+			rsDataSend(&rsData, sizeof(rsData));
+			rs485SetModeRx();
+			lastTicket = ticketIn;
+
+			rsState = RS_WAIT_REPLY;
+		}
+			break;
+
+		case RS_WAIT_REPLY:
+		{
+			if (ticketIn > lastTicket)
+			{
+				ticketTmp = ticketIn - lastTicket;
+			}
+			else
+			{
+				ticketTmp = ticketIn + 0xffff - lastTicket;
+			}
+			
+			if (rsFrameReceived)
+			{	
+				rs485SetModeTx();
+				rsData.boartType = *((uint8 *)ticketTmp);
+				rsData.boardId = *(((uint8 *)ticketTmp)+1);
+				
+				rsDataSend(&rsData, sizeof(rsData));
+				rs485SetModeRx();
+				rsFrameReceived = 0;
+			}
+		}
+			break;
+
+		case RS_REPLY_RECV:
+		{
+
+		}
+			break;
+
+		
+	}
+}
+
 
 
 void main(void)
@@ -325,8 +447,6 @@ void main(void)
 
 	EA=1; //初始化成功，开总中断
 
-	
-  
 	SBUF=0xd4;
 	while(!TI);
 	TI=0;
@@ -339,9 +459,6 @@ void main(void)
 	SBUF=(*SJA_BCANAdr);
 	while(!TI);
 	TI=0;
-	
-
-
 #endif
 
 	rs485SetModeRx();
@@ -349,8 +466,17 @@ void main(void)
 	while(1) 
 	{
 
+		if (rsFrameReceived)
+		{
+			rs485SetModeTx();
+			rsDataSend(&rsData, sizeof(rsData));
+			rs485SetModeRx();
+			rsFrameReceived = 0;
+		}
+
+
 		//delay_ms(500);
-#if 1	
+#if 0	
 		if(flag==1)
 		{
 			rs485SetModeTx();
@@ -378,10 +504,6 @@ void main(void)
 			while(!TI);
 			TI=0;
 		
-			
-
-
-
 			if (a == 'a')
 			{
 				memset(&(rsData), 0, sizeof(rsData));
@@ -392,7 +514,7 @@ void main(void)
 				rsData.rsData = 0xf4;
 			
 				
-				rsDataSend(&rsData);
+				rsDataSend(&rsData, sizeof(rsData));
 			}
 			else if (a == 'b')
 			{
