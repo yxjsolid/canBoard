@@ -1,6 +1,6 @@
 #include "types.h"
-
-
+extern uint8 xdata *SJA_BaseAdr;
+extern uint8 xdata *SJA_BCANAdr;
 
 #define         REG_CONTROL       SJA_BaseAdr+0x00       //ÄÚ²¿¿ØÖÆ¼Ä´æÆ÷
 #define         REG_COMMAND       SJA_BaseAdr+0x01       //ÃüÁî¼Ä´æÆ÷
@@ -147,6 +147,4 @@ extern uint8 Sja_1000_Init(uint8);
 extern bit  BCAN_CMD_PRG(uint8 cmd);
 extern void CAN_Send_onebyte(unsigned char CAN_TX_data,unsigned char length1);
 extern void CAN_Send_Data(uint8 num);
-
-extern unsigned char xdata *SJA_BCANAdr;
 

@@ -3,7 +3,7 @@
 #include "reg51.h"
 #include "RS485.h"
 
-RS485DataStruct rsData;
+RS485DataStruct gRsData;
 
 void init_serialcomm(uint8 baudRate, uint8 freq)
 {
@@ -11,7 +11,6 @@ void init_serialcomm(uint8 baudRate, uint8 freq)
     TMOD &= 0x0f;
     TMOD |= 0x20;       //TMOD: timer 1, mode 2, 8-bit reload 
     PCON |= 0x80;       //SMOD=1; 
-
 
 	switch(baudRate)
 	{
@@ -79,7 +78,7 @@ void serial_send_string(uint8 *strIn)
 bit searchDataStartPattern(uint8 charIn)
 {
 	static uint8 state = 0;
-	char *pattern = START_PATTERN;
+	//char *pattern = START_PATTERN;
 
 	/*
 		$: state == 1
@@ -87,13 +86,13 @@ bit searchDataStartPattern(uint8 charIn)
 		A: state == 3
 		
 	*/
-
 	switch(state)
 	{
 		case 0: //no date
 		{
-			if (charIn == pattern[state])
+			if (charIn == '$')
 			{
+				
 				state = 1;
 			}
 			break;
@@ -102,7 +101,7 @@ bit searchDataStartPattern(uint8 charIn)
 		case 1: //'$' reveived, waiting 'K' 
 		{
 
-			if (charIn == pattern[state])
+			if (charIn == 'K')
 			{
 				state = 2;
 			}
@@ -115,7 +114,7 @@ bit searchDataStartPattern(uint8 charIn)
 
 		case 2: //'$K' received, waiting 'A'
 		{
-			if (charIn == pattern[state])
+			if (charIn == 'A')
 			{
 				state = 3;
 			}
@@ -148,23 +147,15 @@ uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 	uint8 isDataReady = 0;
 	uint8 *rsDataPtr = buf;
 
-	//sendTest(0x1);
-
 	if (!frameFound)
-	{
-		//sendTest(0x2);
-	
+	{	
 		frameFound = searchDataStartPattern(chIn);
-		//sendTest(0x3);
 		//frameLen = strlen(START_PATTERN);
 		frameLen = 3;
-	
-		//sendTest(0x4);
 	}
 	else
 	{
 		frameLen++;
-
 		if(searchDataStartPattern(chIn))
 		{
 			//frameLen = strlen(START_PATTERN);
@@ -188,21 +179,16 @@ uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize)
 		
 		if (frameLen == FRAME_SIZE(bufSize))
 		{
+			frameFound = 0;
+			dataIndex = 0;
+			frameLen = 0;
+		
 			if (chIn == END_PATTERN)
 			{
 				isDataReady = 1;
 			}
-			else
-			{
-				/* frame error*/
-				frameFound = 0;
-				dataIndex = 0;
-				frameLen = 0;	
-			}
 		}
 	}
-
-	//sendTest(0x5);
 	return isDataReady;
 }
 
@@ -232,6 +218,119 @@ void rsDataSend(uint8 *rsDataIn, int size)
 	
 	buffer[index++] = END_PATTERN;
 	serial_send_data(buffer, index);
+}
+
+
+
+bit isRsCmdValid()
+{
+	if ( !(gRsData.status & STAT_BIT_REQ))
+	{
+		/*cmd is reply, ignored*/
+		return 0;
+	}
+	else
+	{
+		if (gRsData.boartType == boardType && gRsData.boardId == boardID)
+		{
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+uint8 getReplyStatus()
+{
+	uint8 status = gRsData.status;
+	
+	switch(boardStatus)
+	{
+		case STAT_BIT_INIT:
+		{
+			if (status & STAT_BIT_CONNECTED)
+			{
+				boardStatus = STAT_BIT_RECOVER;
+				return STAT_BIT_RECOVER;
+			}
+
+			if (status & STAT_BIT_INIT)
+			{
+				boardStatus = STAT_BIT_CONNECTED;
+				return STAT_BIT_CONNECTED;
+			}
+
+		}
+			break;
+
+		case STAT_BIT_CONNECTED:
+		{
+			return STAT_BIT_CONNECTED;
+		}
+			break;
+
+		case STAT_BIT_RECOVER:
+		{
+			if (status & STAT_BIT_RECOVER_REPLY)
+			{
+				boardStatus = STAT_BIT_CONNECTED;
+				return STAT_BIT_CONNECTED;
+			}
+			
+			return STAT_BIT_RECOVER;
+		}
+			break;
+
+		default:
+			/*error?*/
+			return 0;
+			break;
+
+	}
+}
+
+void handleRsCmd(void)
+{
+	uint8 status = 0;
+	uint8 replyData = 0;
+	RS485DataStruct rsReplyData;
+
+	serial_send_string("handle\n");
+
+	if ( isRsCmdValid())
+	{
+		serial_send_string("valid\n");
+
+	
+		status = getReplyStatus();
+
+		switch(boardType)
+		{
+			case BOARD_INPUT:
+			{
+				replyData = P1;
+			}
+				break;
+
+			case BOARD_OUTPUT:
+			{
+				P1 = gRsData.rsData;
+			}
+				break;
+				
+		}
+
+		rsReplyData.boartType = boardType;
+		rsReplyData.boardId = boardID;
+		rsReplyData.status = status;
+		rsReplyData.rsData = replyData;
+
+		rsDataSend(&rsReplyData, sizeof(rsReplyData));
+	}
+	else
+	{
+		serial_send_string("error\n");
+	}
 }
 
 

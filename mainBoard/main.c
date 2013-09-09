@@ -31,8 +31,8 @@ sbit CS=P2^0;
 int timerTicket = 0;
 
 
-BoardStatus idata OutPutBoard[16];
-BoardStatus idata InPutBoard[16];
+//BoardStatus idata OutPutBoard[16];
+//BoardStatus idata InPutBoard[16];
 
 void delay_ms(int t);
 void rs485SetModeRx(void);
@@ -204,7 +204,7 @@ void serial() interrupt 4
 	RI = 0;
 	
 	rsFrameReceived = 0;
-	if (rsDataReceive(a, &rsData, sizeof(RS485DataStruct)))
+	if (rsDataReceive(a, &gRsData, sizeof(RS485DataStruct)))
 	{
 		rsFrameReceived = 1;
 		rs485SetModeTx();//disable serial interrupt
@@ -347,11 +347,11 @@ void rs485StateMachine(int ticketIn)
 		case RS_READY_TO_SEND:
 		{	
 			rs485SetModeTx();
-			rsData.boartType = 0xf1;
-			rsData.boardId = 0xf2;
-			rsData.cmd = 0xf3;
-			rsData.rsData = 0xf4;
-			rsDataSend(&rsData, sizeof(rsData));
+			gRsData.boartType = 0xf1;
+			gRsData.boardId = 0xf2;
+			gRsData.status = 0xf3;
+			gRsData.rsData = 0xf4;
+			rsDataSend(&gRsData, sizeof(gRsData));
 			rs485SetModeRx();
 			lastTicket = ticketIn;
 
@@ -373,10 +373,10 @@ void rs485StateMachine(int ticketIn)
 			if (rsFrameReceived)
 			{	
 				rs485SetModeTx();
-				rsData.boartType = *((uint8 *)ticketTmp);
-				rsData.boardId = *(((uint8 *)ticketTmp)+1);
+				gRsData.boartType = *((uint8 *)ticketTmp);
+				gRsData.boardId = *(((uint8 *)ticketTmp)+1);
 				
-				rsDataSend(&rsData, sizeof(rsData));
+				rsDataSend(&gRsData, sizeof(gRsData));
 				rs485SetModeRx();
 				rsFrameReceived = 0;
 			}
@@ -469,7 +469,7 @@ void main(void)
 		if (rsFrameReceived)
 		{
 			rs485SetModeTx();
-			rsDataSend(&rsData, sizeof(rsData));
+			rsDataSend(&gRsData, sizeof(gRsData));
 			rs485SetModeRx();
 			rsFrameReceived = 0;
 		}
