@@ -4,8 +4,7 @@
 
 
 
-
-canFrameStruct canData;
+canFrameStruct canFrameData;
 
 void setBoard(uint8 id, uint8 dataIn)
 {

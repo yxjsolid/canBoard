@@ -5,12 +5,13 @@
 
 #include "../common/RS485.h"
 #include "../common/sja.h"
+#include "../common/canData.h"
 
 void CAN_Send_anylength(unsigned char *CAN_TX_Buf,unsigned char length1);
 //定义SJA1000的基址
-unsigned char code *SJA_BaseAdr = 0XFE00;
-unsigned char data RevceData[13];
-
+unsigned char xdata *SJA_BaseAdr = 0XFE00;
+//unsigned char data canRecvData[13];
+bit initDone = 0;
 
 //*************************
 sbit P10=P1^0;
@@ -29,7 +30,10 @@ sbit P34=P3^4;
 sbit CS=P2^0;
 
 int timerTicket = 0;
-
+unsigned char a;
+bit flag = 0;
+bit rsFrameReceived = 0;
+bit canFrameReceived = 0;
 
 //BoardStatus idata OutPutBoard[16];
 //BoardStatus idata InPutBoard[16];
@@ -71,58 +75,70 @@ void send_something(void)
 	
 	rs485SetModeRx();
 }
+
+void canEnableRecvInter(uint8 flag)
+{
+	if (flag)
+	{
+		*((uint8 *)REG_INTENABLE) |= 0x1;
+	}
+	else
+	{
+		*((uint8 *)REG_INTENABLE) &= 0xfe;
+	}
+}
+
 void ex0_int(void) interrupt 0 using 1
-{  
-	unsigned char tt,length,i;
-	SJA_BCANAdr=REG_INTERRUPT;
-
-
+{
+	uint8 frameInfo;
+	
 	rs485SetModeTx();
-
-	SBUF=0x1;
-	while(!TI);
-	TI=0;	
-
-	SBUF=0x2;
+	SBUF=0x66;
 	while(!TI);
 	TI=0;
 	rs485SetModeRx();
 
-
-	if((*SJA_BCANAdr)&0x01)                   //产生了接收中断
+	if (IS_RECEIVE_INTR) //receive interrupt
 	{  
-		SJA_BCANAdr=REG_RXBuffer1;
-		tt=*SJA_BCANAdr;
-		length=tt&0x0F;
-		if ((tt&0x40)!=0x40)                   //数据帧   = 为远程帧
-		{  
-			//SJA_BCANAdr =REG_RXBuffer4 ;           //宏定义的变量不能memcpy(RevceData,REG_RXBuffer4,8); 
-			SJA_BCANAdr = REG_RXBuffer1 ;
+		rs485SetModeTx();
+		SBUF=BCAN_READ_REG(REG_INTERRUPT) ;
+		while(!TI);
+		TI=0;
 
-			//memcpy(RevceData,SJA_BCANAdr,13);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
-			//memcpy(Com_RecBuff,RevceData,8);      //测试用的主要是把接收到的数据在发出去，验证数据的正确
-			                                //以下代码是发送到串
-		#if 0
-			rs485SetModeTx();
-			memcpy(RevceData,SJA_BCANAdr,13);
-			for(i=0;i<13;i++)
+		frameInfo = BCAN_READ_REG(REG_RXBuffer1);
+//		length = frameInfo & 0x0F;
+
+		SBUF = frameInfo;
+		while(!TI);
+		TI=0;
+
+
+		SBUF=0x67;
+		while(!TI);
+		TI=0;
+		rs485SetModeRx();
+
+		if ( (frameInfo & 0x40) != 0x40)  //数据帧   = 为远程帧
+		{  
+			if (frameInfo & 0x80)  //eff
 			{
-				SBUF=RevceData[i];
-				while(!TI);
-				TI=0;
+				//memcpy(&(canFrameData), REG_RXBuffer1, 13);
+				canEnableRecvInter(0);
+				canFrameReceived = 1;
+
+				/* DO NOT clear receive buffer here !!!*/
+				return;
 			}
- 			rs485SetModeRx();
-		#endif	
+			else //sff
+			{
+				//ignored
+			}
 		}
 
-		BCAN_CMD_PRG(RRB_CMD);                  //释放SJA1000接收缓冲区，****已经修改
+
+		BCAN_CMD_PRG(RRB_CMD);//clear receive buffer
 	}
-
-
-	send_something();
-
-} 
-
+}
 
 void Sja_test(unsigned char CAN_TX_data)
 {
@@ -196,14 +212,17 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 **入口参数:    无 
 **返 回 值:     
 *****************************************************/
-unsigned char a;
-bit flag = 0;
-bit rsFrameReceived = 0;
+
+
 
 void rs485SetModeRx()
 {
 	P17=0; //output
-	ES=1;
+
+	if (initDone)
+	{
+		ES=1;
+	}
 }
 
 void rs485SetModeTx()
@@ -422,10 +441,8 @@ void main(void)
 	init_serialcomm(RS_Baudrate_4800, OSCILLA_FREQ_12M);  //初始化串口
 	timer0initial();
 
-	
 
 	rs485SetModeTx();
-
 
 	SBUF=0xd1;
 	while(!TI);
@@ -458,8 +475,6 @@ void main(void)
     }
 
 
-
-
 	SBUF=0xd4;
 	while(!TI);
 	TI=0;
@@ -476,6 +491,8 @@ void main(void)
 	EA=1; //初始化成功，开总中断
 #endif
 
+
+	initDone = 1;
 	rs485SetModeRx();
 	//次标识位可以作为，串口接收完，置标志然后发送出去或者当作按键发送******
 	while(1) 
@@ -487,6 +504,37 @@ void main(void)
 			rsDataSend(&gRsData, sizeof(gRsData));
 			rs485SetModeRx();
 			rsFrameReceived = 0;
+		}
+
+		if (canFrameReceived)
+		{
+			//delay_ms(500);
+			//
+			//delay_ms(500);
+			//delay_ms(500);
+		
+
+			rs485SetModeTx();
+			SBUF=0x98;
+			while(!TI);
+			TI=0;
+			rs485SetModeRx();
+		
+			while (BCAN_READ_REG(REG_STATUS)&0x1) //receive buffer not empty
+			{
+				memcpy((uint8 *)&(canFrameData), (uint8 *)REG_RXBuffer1, 13);
+				rs485SetModeTx();
+				SBUF=0x99;
+				while(!TI);
+				TI=0;
+				rs485SetModeRx();
+
+				BCAN_CMD_PRG(RRB_CMD);
+				CAN_Send_Frame(&(canFrameData));
+			}
+
+			canFrameReceived = 0;
+			canEnableRecvInter(1);
 		}
 
 

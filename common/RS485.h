@@ -1,3 +1,6 @@
+#ifndef	__RS_485_h__
+#define	__RS_485_h__
+
 #include "types.h"
 
 #define RS_Baudrate_4800 1
@@ -64,3 +67,5 @@ extern uint8 rsDataReceive(uint8 chIn, uint8 * buf, uint8 bufSize);
 extern void rsDataSend(uint8 *rsDataIn, int size);
 extern  bit searchDataStartPattern(uint8 charIn);
 extern void handleRsCmd(void);
+
+#endif

@@ -1,4 +1,9 @@
+#ifndef	__SJA_h__
+#define	__SJA_h__
+
 #include "types.h"
+#include "canData.h"
+
 extern uint8 xdata *SJA_BaseAdr;
 extern uint8 xdata *SJA_BCANAdr;
 
@@ -143,8 +148,22 @@ extern uint8 xdata *SJA_BCANAdr;
 #define REG_TX_FAME_DATA8	REG_TXBuffer13
 
 
+
+
+
+
+#define BCAN_READ_REG(x) (*((uint8 *)(x)))
+
+
+#define IS_RECEIVE_INTR (BCAN_READ_REG(REG_INTERRUPT) & 0x01)
+
 extern uint8 Sja_1000_Init(uint8);
 extern bit  BCAN_CMD_PRG(uint8 cmd);
 extern void CAN_Send_onebyte(unsigned char CAN_TX_data,unsigned char length1);
 extern void CAN_Send_Data(uint8 num);
+extern void CAN_Send_Frame(canFrameStruct * frame);
+
+
+
+#endif
 

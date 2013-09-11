@@ -1,3 +1,6 @@
+#ifndef	__CAN_DATA_h__
+#define	__CAN_DATA_h__
+
 #include "types.h"
 
 
@@ -33,5 +36,7 @@ enum CMD_ID
 };
 
 
-extern canFrameStruct canData;
+extern canFrameStruct canFrameData;
+
+#endif
 

@@ -3,6 +3,7 @@
 #include "intrins.h"
 #include <reg51.h>
 #include "sja.h"
+
 uint8 xdata *SJA_BCANAdr;
 
 
@@ -283,6 +284,24 @@ unsigned char BCAN_DATA_WRITE(unsigned char *SendDataBuf)
     BCAN_CMD_PRG(TR_CMD);             //请求发送         
     return 0;
 }
+
+
+void CAN_Send_Frame(canFrameStruct * frame)
+{
+	unsigned char temptt;
+	loop:
+    SJA_BCANAdr = REG_STATUS;    
+         temptt=*SJA_BCANAdr; 
+	//temptt=Read_SJA1000(REG_STATUS);
+	if((temptt&0x04)==0x00)  goto loop;               //循环检测等待                       
+	//可以向发送缓冲器写数据
+	{
+		memcpy((uint8 *)REG_RXBuffer1,frame,13);   
+		//数据发送请求
+    	BCAN_CMD_PRG(TR_CMD);            //请求发送  
+	}
+}
+
 //CAN发送任意长度字节
 void CAN_Send_anylength(unsigned char *CAN_TX_Buf,unsigned char length1)
 {
