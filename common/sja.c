@@ -204,7 +204,7 @@ bit BCAN_ENTER_RETMODEL(void)     //÷√Œª∏¥Œª«Î«Û
 bit BCAN_QUIT_RETMODEL(void)
 {
 	BCAN_SET_REG(REG_CONTROL, BCAN_GET_REG(REG_CONTROL)&0xfe);
-	if(((BCAN_GET_REG(REG_CONTROL))&0x01) == 1)
+	if((BCAN_GET_REG(REG_CONTROL)) != 0)
 		return   0;
 	else
 		return   1;   
@@ -224,6 +224,26 @@ bit  BCAN_CMD_PRG(unsigned char cmd)
 {
 	SJA_BCANAdr=REG_COMMAND;
 	*SJA_BCANAdr=cmd;
+
+	rs485SetModeTx();
+
+
+	SBUF=0x99;
+	while(!TI);
+	TI=0;
+
+	SBUF=cmd;
+	while(!TI);
+	TI=0;
+
+		
+
+	SBUF=0x99;
+	while(!TI);
+	TI=0;
+
+	rs485SetModeRx();
+
 
 	switch(cmd)
 	{

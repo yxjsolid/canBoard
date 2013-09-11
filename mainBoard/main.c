@@ -8,7 +8,7 @@
 
 void CAN_Send_anylength(unsigned char *CAN_TX_Buf,unsigned char length1);
 //定义SJA1000的基址
-unsigned char xdata *SJA_BaseAdr = 0XFE00;
+unsigned char code *SJA_BaseAdr = 0XFE00;
 unsigned char data RevceData[13];
 
 
@@ -39,7 +39,7 @@ void rs485SetModeRx(void);
 void rs485SetModeTx(void);
 
 
-void send_something(unsigned char CAN_TX_data)
+void send_something(void)
 {
 	rs485SetModeTx();
 
@@ -62,16 +62,25 @@ void send_something(unsigned char CAN_TX_data)
 	while(!TI);
 	TI=0;
 
-	SBUF=CAN_TX_data;
-	while(!TI);
-	TI=0;
-
 	rs485SetModeRx();
 }
 void ex0_int(void) interrupt 0 using 1
 {  
 	unsigned char tt,length,i;
 	SJA_BCANAdr=REG_INTERRUPT;
+
+
+	rs485SetModeTx();
+
+	SBUF=0x1;
+	while(!TI);
+	TI=0;	
+
+	SBUF=0x2;
+	while(!TI);
+	TI=0;
+	rs485SetModeRx();
+
 
 	if((*SJA_BCANAdr)&0x01)                   //产生了接收中断
 	{  
@@ -86,7 +95,7 @@ void ex0_int(void) interrupt 0 using 1
 			//memcpy(RevceData,SJA_BCANAdr,13);  //功能：由src所指内存区域复制count个字节到dest所指内存区域
 			//memcpy(Com_RecBuff,RevceData,8);      //测试用的主要是把接收到的数据在发出去，验证数据的正确
 			                                //以下代码是发送到串
-
+		#if 0
 			rs485SetModeTx();
 			memcpy(RevceData,SJA_BCANAdr,13);
 			for(i=0;i<13;i++)
@@ -96,10 +105,14 @@ void ex0_int(void) interrupt 0 using 1
 				TI=0;
 			}
  			rs485SetModeRx();
+		#endif	
 		}
 
 		BCAN_CMD_PRG(RRB_CMD);                  //释放SJA1000接收缓冲区，****已经修改
 	}
+
+
+	send_something();
 
 } 
 
@@ -233,14 +246,10 @@ void timer0initial()
 //定时器0中断,不够8个就在此发送
 void time_intt0(void) interrupt 1 using 2
 {
-	//static unsigned char timer_flag = 0;
 	static unsigned char timer_count = 0;
 	setTimer();
 	if (timer_count == 4)
 	{
-		//timer_flag = !timer_flag;
-		//P10 = timer_flag;
-
 		P10 = !P10;
 		timer_count = 0;
 	}
@@ -248,11 +257,8 @@ void time_intt0(void) interrupt 1 using 2
 	{
 		timer_count++;
 	}
-
 	timerTicket++;
-
 }
-
 
 void delay_ms(int t)
 {
@@ -445,7 +451,7 @@ void main(void)
     }
 
 
-	EA=1; //初始化成功，开总中断
+
 
 	SBUF=0xd4;
 	while(!TI);
@@ -459,6 +465,8 @@ void main(void)
 	SBUF=(*SJA_BCANAdr);
 	while(!TI);
 	TI=0;
+
+	EA=1; //初始化成功，开总中断
 #endif
 
 	rs485SetModeRx();
@@ -476,7 +484,7 @@ void main(void)
 
 
 		//delay_ms(500);
-#if 0	
+#if 1	
 		if(flag==1)
 		{
 			rs485SetModeTx();
@@ -506,15 +514,15 @@ void main(void)
 		
 			if (a == 'a')
 			{
-				memset(&(rsData), 0, sizeof(rsData));
+				memset(&(gRsData), 0, sizeof(gRsData));
 
-				rsData.boartType = 0xf1;
-				rsData.boardId = 0xf2;
-				rsData.cmd = 0xf3;
-				rsData.rsData = 0xf4;
+				gRsData.boartType = 0xf1;
+				gRsData.boardId = 0xf2;
+				gRsData.status= 0xf3;
+				gRsData.rsData = 0xf4;
 			
 				
-				rsDataSend(&rsData, sizeof(rsData));
+				rsDataSend(&gRsData, sizeof(gRsData));
 			}
 			else if (a == 'b')
 			{
@@ -542,7 +550,7 @@ void main(void)
 			else
 			{
 
-				Sja_test(a);
+				//Sja_test(a);
 			}
 
 			
