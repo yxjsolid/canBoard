@@ -74,6 +74,8 @@ void serial_send_string(uint8 *strIn)
 	serial_send_data(strIn, strlen(strIn));
 }
 
+
+
 //$KA,XX,XX,XX,*
 bit searchDataStartPattern(uint8 charIn)
 {

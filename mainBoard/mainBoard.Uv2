@@ -52,7 +52,7 @@ Options 1,0,0  // Target 'Target 1'
  SVCSID <>
  MODEL5=0
  RTOS5=0
- ROMSZ5=2
+ ROMSZ5=1
  DHOLD5=0
  XHOLD5=0
  T51FL=80
@@ -113,8 +113,8 @@ Options 1,0,0  // Target 'Target 1'
  LX51IDS ()
   OPTDL (S8051.DLL)()(DP51.DLL)(-p52)(S8051.DLL)()(TP51.DLL)(-p52)
   OPTDBG 44029,0,()()()()()()()()()() ()()()()
- FLASH1 { 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
+ FLASH1 { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 }
  FLASH2 ()
- FLASH3 ()
+ FLASH3 ("" ())
 EndOpt
 

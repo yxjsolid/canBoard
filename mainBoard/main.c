@@ -38,20 +38,16 @@ void delay_ms(int t);
 void rs485SetModeRx(void);
 void rs485SetModeTx(void);
 
-
 void send_something(void)
 {
+	
 	rs485SetModeTx();
-
-	SBUF=0xee;
-	while(!TI);
-	TI=0;
 	
 	SJA_BCANAdr = REG_INTERRUPT;
 	SBUF=(*SJA_BCANAdr);
 	while(!TI);
 	TI=0;
-	
+
 	SJA_BCANAdr = REG_INTENABLE;
 	SBUF=(*SJA_BCANAdr);
 	while(!TI);
@@ -62,6 +58,17 @@ void send_something(void)
 	while(!TI);
 	TI=0;
 
+	SJA_BCANAdr = REG_CONTROL;
+	SBUF=(*SJA_BCANAdr);
+	while(!TI);
+	TI=0;
+
+	SJA_BCANAdr = REG_ERRCATCH;
+	SBUF=(*SJA_BCANAdr);
+	while(!TI);
+	TI=0;
+
+	
 	rs485SetModeRx();
 }
 void ex0_int(void) interrupt 0 using 1
@@ -179,8 +186,8 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 {
 	PX0=0;
 	IT0=0; // TCON set EXC0 trigge mode
-	// EA=1;
-	//EX0=1;
+	EX0=1;
+	EA=0;
 }
 
 /****************************************************
@@ -407,7 +414,7 @@ void main(void)
 	unsigned char num = 0;
 		
 	CS=0;                //片选择引脚
-	EA=0;
+	
 	Init_Cpu(); 
 
 	P1 = 0;
@@ -541,6 +548,11 @@ void main(void)
 				while(!TI);
 				TI=0;
 
+				SJA_BCANAdr = REG_CONTROL;
+				SBUF=(*SJA_BCANAdr);
+				while(!TI);
+				TI=0;
+
 				SJA_BCANAdr = REG_ERRCATCH;
 				SBUF=(*SJA_BCANAdr);
 				while(!TI);
@@ -550,7 +562,7 @@ void main(void)
 			else
 			{
 
-				//Sja_test(a);
+				Sja_test(a);
 			}
 
 			

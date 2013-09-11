@@ -5,20 +5,8 @@
 #include "sja.h"
 uint8 xdata *SJA_BCANAdr;
 
-#define BCAN_GET_REG(pREG) (*((uint8 *)pREG))
-bit BCAN_SET_REG(uint8 *pREG, uint8 val)
-{
-	*(pREG) = val;
-	if ( BCAN_GET_REG(pREG) == val)
-	{
-		return 0;
-	}
-	else
-	{
-		return 1;
-	}
-}
 
+//***********************************************************************
 /************************************************************************
 *函数原型: bit BCAN_SET_OUTCLK( unsigned char Clock_Out)               *
 *参数说明:                                                             *
@@ -30,9 +18,6 @@ bit BCAN_SET_REG(uint8 *pREG, uint8 val)
 ************************************************************************/
 bit BCAN_SET_OUTCLK(unsigned char Clock_Out)
 {
-
-	return BCAN_SET_REG(REG_CDR, Clock_Out);
-#if 0
   SJA_BCANAdr=REG_CDR;           
 
   *SJA_BCANAdr=Clock_Out;        
@@ -40,8 +25,78 @@ bit BCAN_SET_OUTCLK(unsigned char Clock_Out)
      return 1; 
    else 
      return 0;
- #endif
 } 
+
+bit BCAN_SET_BANDRATE(unsigned char CAN_ByteRate, uint8 freq)         //波特率选择
+{
+	bit ret = 1;
+	unsigned char BR_Num= CAN_ByteRate,BTR0_num,BTR1_num;
+	switch (BR_Num)
+	{
+		case ByteRate_10k:
+		case ByteRate_40k:
+		case ByteRate_50k:
+		case ByteRate_80k:
+		case ByteRate_200k:
+		case ByteRate_250k:
+		case ByteRate_400k:
+		case ByteRate_500k:
+		case ByteRate_800k:
+		case ByteRate_1000k:
+			break;
+
+
+		case ByteRate_100k:
+		{
+			if (freq == OSCILLA_FREQ_12M)
+			{
+				//BTR0_num=0x02;//12MHZ
+				//BTR1_num=0x2f;
+
+				BTR0_num=0x02;//12MHZ
+				BTR1_num=0xAf;
+			}
+			else if(freq == OSCILLA_FREQ_16M)
+			{
+				BTR0_num=0x43; //16MHZ
+				BTR1_num=0x2f;
+			}
+		}
+		   break;
+		   
+		case ByteRate_125k:
+		{
+			if (freq == OSCILLA_FREQ_12M)
+			{	
+				// to be determine
+				//BTR0_num=0x02;//12MHZ
+				//BTR1_num=0x2f;
+			}
+			else if(freq == OSCILLA_FREQ_16M)
+			{
+				BTR0_num=0x03; //16MHZ
+				BTR1_num=0x1c;
+			}
+		}
+			break;
+
+		default:
+			return 1;
+			break;
+		}
+
+	 SJA_BCANAdr=REG_BTR0;
+    *SJA_BCANAdr=BTR0_num;
+    if(*SJA_BCANAdr!=BTR0_num)
+      {return 1;}
+    SJA_BCANAdr=REG_BTR1;
+    *SJA_BCANAdr=BTR1_num;
+    if(*SJA_BCANAdr!=BTR1_num)
+      {return 1;}
+    return 0;
+	
+    return ret;
+}
 
 /************************************************************************
 *函数原型: bit BCAN_SET_OBJECT(unsigned char  BCAN_ACR0,BCAN_ACR1,BCAN_ACR2,BCAN_ACR3     
@@ -100,73 +155,24 @@ bit BCAN_SET_OBJECT(unsigned char  BCAN_ACR0,BCAN_ACR1,BCAN_ACR2,BCAN_ACR3,BCAN_
 ;*     其它晶体的频率的值的波特率，需自己计算 。该子程序只能用于        *
 ;*     复位模式                                                         *  
 ;************************************************************************/ 
-bit BCAN_SET_BANDRATE(unsigned char CAN_ByteRate, uint8 freq)         //波特率选择
-{
-	bit ret = 1;
-	unsigned char BR_Num= CAN_ByteRate,BTR0_num,BTR1_num;
-	switch (BR_Num)
-	{
-		case ByteRate_10k:
-		case ByteRate_40k:
-		case ByteRate_50k:
-		case ByteRate_80k:
-		case ByteRate_200k:
-		case ByteRate_250k:
-		case ByteRate_400k:
-		case ByteRate_500k:
-		case ByteRate_800k:
-		case ByteRate_1000k:
-			break;
 
-
-		case ByteRate_100k:
-		{
-			if (freq == OSCILLA_FREQ_12M)
-			{
-				BTR0_num=0x02;//12MHZ
-				BTR1_num=0x2f;
-			}
-			else if(freq == OSCILLA_FREQ_16M)
-			{
-				BTR0_num=0x43; //16MHZ
-				BTR1_num=0x2f;
-			}
-		}
-		   break;
-		   
-		case ByteRate_125k:
-		{
-			if (freq == OSCILLA_FREQ_12M)
-			{	
-				// to be determine
-				//BTR0_num=0x02;//12MHZ
-				//BTR1_num=0x2f;
-			}
-			else if(freq == OSCILLA_FREQ_16M)
-			{
-				BTR0_num=0x03; //16MHZ
-				BTR1_num=0x1c;
-			}
-		}
-			break;
-
-		default:
-			return 1;
-			break;
-		}
-
-	ret = BCAN_SET_REG(REG_BTR0, BTR0_num);
-	ret |= BCAN_SET_REG(REG_BTR1, BTR1_num);
-	
-    return ret;
-}
 /************************************************************************
  *函数原型: bit BCAN_SET_CONTROL(unsigend char CMD)                     *
  *参数说明: 设置控制寄存器                                              *
  ************************************************************************/
 bit BCAN_SET_CONTROL(unsigned char CMD)
-{
-	return BCAN_SET_REG(REG_CONTROL, CMD);
+{  unsigned char TempData;
+ 
+  SJA_BCANAdr=REG_CONTROL;   //SJA_BaseAdr+0x00  控制寄存器
+  TempData=  *SJA_BCANAdr; 
+ 
+  *SJA_BCANAdr=CMD;
+ 
+  if (*SJA_BCANAdr == CMD)
+    return 0;
+  else
+    return 1;
+
 }
 /************************************************************************
  *函数原型:  bit   BCAN_CREATE_COMMUNATION(void)                        * 
@@ -176,10 +182,16 @@ bit BCAN_SET_CONTROL(unsigned char CMD)
  *           1 ; 表示SJA1000与处理器接口不正常                          *
  *说明:该函数用于检测CAN控制器的接口是否正常                            *
  ************************************************************************/
-bit BCAN_CREATE_COMMUNATION(void)
-{
-	return BCAN_SET_REG(REG_TEST, 0xaa);
-}
+ bit BCAN_CREATE_COMMUNATION(void)
+ {  
+    SJA_BCANAdr=REG_TEST;      
+    *SJA_BCANAdr=0xaa;       //写入测试值
+    if(*SJA_BCANAdr == 0xaa)
+       return 0;            //读测试正确
+    else
+       return 1;
+     
+ }
 
  /************************************************************************
  *函数原型:      bit   BCAN_ENTER_RETMODEL(void)                        *
@@ -190,27 +202,18 @@ bit BCAN_CREATE_COMMUNATION(void)
  *                                                                      * 
  *说明:      CAN控制器进入复位工作模式                                  *
  ************************************************************************/ 
-bit BCAN_ENTER_RETMODEL(void)     //置位复位请求
-{
-	BCAN_SET_REG(REG_CONTROL, 0x09);//置位复位请求 和单滤波模式
+ bit   BCAN_ENTER_RETMODEL(void)     //置位复位请求
+ {
+    unsigned   char   TempData;
+    SJA_BCANAdr  = REG_CONTROL;   
 
-	// filter moder not readable
-	if( (BCAN_GET_REG(REG_CONTROL)&0x01) == 1)
-		return   0;
-	else
-		return   1;   
-}
- 
-bit BCAN_QUIT_RETMODEL(void)
-{
-	BCAN_SET_REG(REG_CONTROL, BCAN_GET_REG(REG_CONTROL)&0xfe);
-	if((BCAN_GET_REG(REG_CONTROL)) != 0)
-		return   0;
-	else
-		return   1;   
-} 
-
-
+  TempData=  *SJA_BCANAdr;       
+    *SJA_BCANAdr=0x09;                 //置位复位请求 和单滤波模式
+    if((*SJA_BCANAdr&0x01) == 1)
+     return   0;
+    else
+      return   1;   
+ } 
 /************************************************************************
  *函数原型:   BCAN_CMD_PRG(unsigned char cmd)                           *
  *参数说明:  unsigned char cmd                                          *
@@ -221,71 +224,48 @@ bit BCAN_QUIT_RETMODEL(void)
  *说明:      启动命令字                                                 *
  ************************************************************************/
 bit  BCAN_CMD_PRG(unsigned char cmd)
-{
-	SJA_BCANAdr=REG_COMMAND;
-	*SJA_BCANAdr=cmd;
+ {
+   SJA_BCANAdr=REG_COMMAND;            //访问地址指向命令寄存器
+   *SJA_BCANAdr=cmd;                   //启动命令字
+ 
+   switch(cmd)
+   {    case  TR_CMD:                    
 
-	rs485SetModeTx();
+           return    0;
+           break;
 
+  case  SRR_CMD:      
 
-	SBUF=0x99;
-	while(!TI);
-	TI=0;
+      return 0;
+     break;
+    
+  case  AT_CMD:                  
 
-	SBUF=cmd;
-	while(!TI);
-	TI=0;
-
-		
-
-	SBUF=0x99;
-	while(!TI);
-	TI=0;
-
-	rs485SetModeRx();
-
-
-	switch(cmd)
-	{
-		case  TR_CMD:                    
-
-			return    0;
-			break;
-
-		case  SRR_CMD:      
-
-			return 0;
-			break;
-
-		case  AT_CMD:                  
-
-			SJA_BCANAdr = REG_STATUS;   //访问地址指向状态寄存器   
-			if((*SJA_BCANAdr & 0x20)==0) //判断是否正在发送
-				return  0;
-			else
-				return  1;              
-			break; 
-
-		case  RRB_CMD:                   
-			SJA_BCANAdr = REG_STATUS;   //访问地址指向状态寄存器   
+            SJA_BCANAdr = REG_STATUS;   //访问地址指向状态寄存器   
+           if((*SJA_BCANAdr & 0x20)==0) //判断是否正在发送
+             return  0;
+           else
+             return  1;              
+           break; 
+     case  RRB_CMD:                   
+           SJA_BCANAdr = REG_STATUS;   //访问地址指向状态寄存器   
            if((*SJA_BCANAdr & 0x01)==1)
               return  1;
            else           
               return  0;               
            break;  
-               
-		case  COS_CMD:                  
+     case  COS_CMD:                  
 
-			SJA_BCANAdr = REG_STATUS;   
-			if((*SJA_BCANAdr & 0x02)==0)//判断清除超载是否成功
-			return  0; 
-			else
-			return  1;             
-			break; 
-		default:
-			return  1;
-			break; 
-	}
+           SJA_BCANAdr = REG_STATUS;   
+           if((*SJA_BCANAdr & 0x02)==0)//判断清除超载是否成功
+             return  0; 
+           else
+             return  1;             
+           break; 
+     default:
+             return  1;
+             break; 
+   }
 }
 unsigned char BCAN_DATA_WRITE(unsigned char *SendDataBuf)
  {  unsigned char temp;
@@ -350,66 +330,6 @@ void CAN_Send_onebyte(unsigned char CAN_TX_data,unsigned char length1)
     BCAN_CMD_PRG(TR_CMD);            //请求发送  
 	}
 }
-
-
-//void CAN_Send_Data(unsigned char CAN_TX_data, uint8 length1)
-void CAN_Send_Data(uint8 num)
-{
-	unsigned char temptt;
-	uint8 xdata *canAddr;
-	uint8 dataTmpStart = 0x2;
-	uint8 i = 0;
-	
-	loop:
-    canAddr = REG_STATUS;    
-         temptt=*canAddr; 
-	//temptt=Read_SJA1000(REG_STATUS);
-	if((temptt&0x04)==0x00)  goto loop;               //循环检测等待                       
-	//可以向发送缓冲器写数据
-	{
-	    canAddr = REG_RXBuffer1;
-
-		if (0) //eff
-		{
-			*canAddr = 8|0x80;
-
-			canAddr = REG_RXBuffer2;
-			*canAddr=0xff;
-
-			canAddr = REG_RXBuffer3;
-			*canAddr=0xff;
-
-			canAddr = REG_RXBuffer4;
-			*canAddr=0xff;
-
-			canAddr = REG_RXBuffer5;
-			*canAddr=0xff;
-		}
-		else
-		{
-			*canAddr = 8;
-			//*canAddr = 8|0x80;
-
-			canAddr = REG_RXBuffer2;
-			*canAddr=0xff;
-
-			canAddr = REG_RXBuffer3;
-			*canAddr=0xff;
-		}
-
-		
-
-#if 1
-		for ( i = 0; i < 8; i++)
-		{
-			canAddr++;
-			*canAddr = num++;
-		}
-#endif		
-	    BCAN_CMD_PRG(TR_CMD);            //请求发送  
-	}
-}
-
 /****************************************************
 **函数原型：   bit Sja_1000_Init(void)
 **功    能：   初始化SJA10000
@@ -422,44 +342,43 @@ void CAN_Send_Data(uint8 num)
       4： 设置验收滤波器失败
       5： 设置波特率失败     
 *****************************************************/
+
 unsigned char Sja_1000_Init(uint8 freq)
 {
-	bit s; 
-	EX0 = 0;
+ bit s; 
+ EA=0;                                 //关总中断
+   s=BCAN_ENTER_RETMODEL();
+ if (s==1) return 1; 
+    s=BCAN_CREATE_COMMUNATION();       //建立通信
+    if (s==1) return 2;
 
-	if ( BCAN_ENTER_RETMODEL())
-	{
-		return 1; 
-	}
+  s=BCAN_SET_OUTCLK(0x88);             //Pelican
+ if (s==1) return 3;
 
-	if ( BCAN_CREATE_COMMUNATION())
-	{
-		return 2;
-	}
+ s=BCAN_SET_OBJECT(0xFF,0x4E,0x16,0x00,0xff,0xff,0xff,0xff);//屏蔽寄存器，都设为无关，接收所有报文 
+                                                            //当屏蔽位为1，不滤波，0就滤波必须相等
+ //s=BCAN_SET_OBJECT(0x55,0xe0,0xaa,0xa1,0x00,0x00,0xff,0xff);//验收码&屏蔽码
 
-	if ( BCAN_SET_OUTCLK(0x88))//Pelican
-	{
-		return 3;
-	}
+ if (s==1) return 4;
 
-	s=BCAN_SET_OBJECT(0xFF,0x4E,0x16,0x00,0xff,0xff,0xff,0xff);//屏蔽寄存器，都设为无关，接收所有报文 
-	                                                //当屏蔽位为1，不滤波，0就滤波必须相等
-	//s=BCAN_SET_OBJECT(0x55,0xe0,0xaa,0xa1,0x00,0x00,0xff,0xff);//验收码&屏蔽码
+ s=BCAN_SET_BANDRATE(ByteRate_100k, freq);    //设置波特率125K 16MHZ
+    if (s==1) return 5;
+    
+ SJA_BCANAdr=REG_OCR ;                  //输出控制寄存器  
+    *SJA_BCANAdr=0x1a;        
+    SJA_BCANAdr=REG_INTENABLE;      
 
-	if (s==1) return 4;
+   *SJA_BCANAdr=0x1D;                  //设置中断，接收和发送中断
+    
+    // s=BCAN_SET_CONTROL(0x08);
+    SJA_BCANAdr=REG_CONTROL;            //退出 复位模式
+    *SJA_BCANAdr=*SJA_BCANAdr&0xfe;
+     if(*SJA_BCANAdr!=0x00)
+     return 6;
 
-	if ( BCAN_SET_BANDRATE(ByteRate_100k, freq) )
-	{
-		return 5;
-	}
-	
-	BCAN_SET_REG(REG_OCR, 0x1a);//out put control
-	BCAN_SET_REG(REG_INTENABLE, 0x1d);
-	BCAN_SET_REG(REG_CONTROL, 0x1d);
+ //if (s==1) return 6;
 
-	if ( BCAN_QUIT_RETMODEL() )
-	return 6;
-
-	EX0=1;
-	return 0;   
+    EA=1;
+ return 0;   
 } 
+
