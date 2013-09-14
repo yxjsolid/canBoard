@@ -54,8 +54,11 @@ bit BCAN_SET_BANDRATE(unsigned char CAN_ByteRate, uint8 freq)         //²¨ÌØÂÊÑ¡
 				//BTR0_num=0x02;//12MHZ
 				//BTR1_num=0x2f;
 
-				BTR0_num=0x02;//12MHZ
-				BTR1_num=0xAf;
+				//BTR0_num=0x02;//12MHZ
+				//BTR1_num=0xAf;
+
+				BTR0_num=0x42;//12MHZ
+				BTR1_num=0x2f;
 			}
 			else if(freq == OSCILLA_FREQ_16M)
 			{
