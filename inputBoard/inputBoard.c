@@ -26,13 +26,20 @@ bit flag = 0;
 bit rsFrameReceived = 0;
 
 unsigned char num = 0;
-
+uint8 boardID = 0;
+uint8 boardType = 0;
+uint8 boardStatus = 0;
 
 void delay_ms(int t);
 void rs485SetModeRx(void);
 void rs485SetModeTx(void);
 
-
+void initBoard(void)
+{
+	boardID = 1;
+	boardType = BOARD_INPUT;
+	boardStatus = Board_status_Init;
+}
 //***************************************************
 
 //初始化cpu
@@ -72,10 +79,8 @@ void sendTest(uint8 test)
 
 }
 
-void serial() interrupt 4 using 1
+void serial() interrupt 4
 {
-
-	
 	a = SBUF;
 	flag = 1;
 	RI = 0;
@@ -164,12 +169,11 @@ enum opera_state
 	
 void main(void)
 {  
-		
 	CS=0;                //片选择引脚
 	EA=0;
-	
-	P1 = 0;
+	P1 = 0xff;
 
+	initBoard();
 	init_serialcomm(RS_Baudrate_4800, OSCILLA_FREQ_12M);  //初始化串口
 	timer0initial();
 
@@ -202,123 +206,15 @@ void main(void)
 #endif
 
 	rs485SetModeRx();
-	//次标识位可以作为，串口接收完，置标志然后发送出去或者当作按键发送******
-	//rsFrameReceived = 1;
 	while(1) 
 	{
 		if (rsFrameReceived)
 		{
-			rs485SetModeTx();
+			rs485SetModeTx();		
 			handleRsCmd();
 			rsFrameReceived = 0;
 			rs485SetModeRx();
 		}
-#if 0
-		if (num == 11)
-		{
-			rs485SetModeTx();
-			
-			
-			serial_send_data(buffer, 11);
-			rs485SetModeRx();
-
-			num = 0;
-		}
-#endif		
-		
-
-#if 0
-		if(flag==1)
-		{
-			if (a == 'a')
-			{
-				rs485SetModeTx();
-				flag=0;
-				SBUF=0xa;
-				
-				while(!TI);
-				TI=0;
-				rs485SetModeRx();
-			}
-		}
-#endif		
-
-
-		//delay_ms(500);
-#if 0	
-		if(flag==1)
-		{
-			rs485SetModeTx();
-
-			flag=0;
-			SBUF=0xa;
-			
-			while(!TI);
-			TI=0;
-
-			SBUF=0xb;
-			while(!TI);
-			TI=0;
-			
-			SBUF=0xc;
-			while(!TI);
-			TI=0;
-
-			
-			SBUF=num++;
-			while(!TI);
-			TI=0;
-			
-			SBUF=a;
-			while(!TI);
-			TI=0;
-		
-			if (a == 'a')
-			{
-				memset(&(rsData), 0, sizeof(rsData));
-
-				rsData.boartType = 0xf1;
-				rsData.boardId = 0xf2;
-				rsData.cmd = 0xf3;
-				rsData.rsData = 0xf4;
-			
-				
-				rsDataSend(&rsData, sizeof(rsData));
-			}
-			else if (a == 'b')
-			{
-				SJA_BCANAdr = REG_INTERRUPT;
-				SBUF=(*SJA_BCANAdr);
-				while(!TI);
-				TI=0;
-
-				SJA_BCANAdr = REG_INTENABLE;
-				SBUF=(*SJA_BCANAdr);
-				while(!TI);
-				TI=0;
-
-				SJA_BCANAdr = REG_STATUS;
-				SBUF=(*SJA_BCANAdr);
-				while(!TI);
-				TI=0;
-
-				SJA_BCANAdr = REG_ERRCATCH;
-				SBUF=(*SJA_BCANAdr);
-				while(!TI);
-				TI=0;
-				
-			}
-			else
-			{
-
-				Sja_test(a);
-			}
-
-			
-			rs485SetModeRx();
-			
-		}
-#endif
 	}
 
 }

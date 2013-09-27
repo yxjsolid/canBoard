@@ -57,8 +57,11 @@ bit BCAN_SET_BANDRATE(unsigned char CAN_ByteRate, uint8 freq)         //波特率选
 				//BTR0_num=0x02;//12MHZ
 				//BTR1_num=0xAf;
 
+				//BTR0_num=0x42;//12MHZ
+				//BTR1_num=0x2f;
+
 				BTR0_num=0x42;//12MHZ
-				BTR1_num=0x2f;
+				BTR1_num=0xaf;
 			}
 			else if(freq == OSCILLA_FREQ_16M)
 			{
@@ -292,6 +295,8 @@ unsigned char BCAN_DATA_WRITE(unsigned char *SendDataBuf)
 void CAN_Send_Frame(canFrameStruct * frame, uint8 len)
 {
 	unsigned char temptt;
+	frame->info = len | 0x80;
+	
 	loop:
     SJA_BCANAdr = REG_STATUS;    
          temptt=*SJA_BCANAdr; 
@@ -299,7 +304,7 @@ void CAN_Send_Frame(canFrameStruct * frame, uint8 len)
 	if((temptt&0x04)==0x00)  goto loop;               //循环检测等待                       
 	//可以向发送缓冲器写数据
 	{
-		memcpy((uint8 *)REG_RXBuffer1,frame,len);   
+		memcpy((uint8 *)REG_RXBuffer1,frame,len + 5);   
 		//数据发送请求
     	BCAN_CMD_PRG(TR_CMD);            //请求发送  
 	}
@@ -374,7 +379,7 @@ unsigned char Sja_1000_Init(uint8 freq)
     s=BCAN_CREATE_COMMUNATION();       //建立通信
     if (s==1) return 2;
 
-  s=BCAN_SET_OUTCLK(0x88);             //Pelican
+  s=BCAN_SET_OUTCLK(0xc8);             //Pelican
  if (s==1) return 3;
 
  s=BCAN_SET_OBJECT(0xFF,0x4E,0x16,0x00,0xff,0xff,0xff,0xff);//屏蔽寄存器，都设为无关，接收所有报文 

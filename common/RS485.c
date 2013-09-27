@@ -243,8 +243,6 @@ bit isRsCmdValid()
 	return 0;
 }
 
-
-
 uint8 getReplyStatus()
 {
 	uint8 status = gRsData.status;
@@ -259,7 +257,7 @@ uint8 getReplyStatus()
 				return Board_status_Recover;
 			}
 
-			if (status & Board_status_Init)
+			if (status == Board_status_Init)
 			{
 				boardStatus = Board_status_Connected;
 				return Board_status_Connected;
@@ -276,7 +274,7 @@ uint8 getReplyStatus()
 
 		case Board_status_Recover:
 		{
-			if (status & Board_status_recover_Reply)
+			if (status == Board_status_recover_Reply)
 			{
 				boardStatus = Board_status_Connected;
 				return Board_status_Connected;
@@ -318,7 +316,7 @@ void handleRsCmd(void)
 
 			case BOARD_OUTPUT:
 			{
-				if (gRsData.cmd == CMD_SET_ACTION)
+				if ((gRsData.cmd & (~CMD_BIT_REQ)) == CMD_SET_ACTION)
 				{
 					P1 = gRsData.rsData;
 				}
@@ -336,7 +334,7 @@ void handleRsCmd(void)
 	}
 	else
 	{
-		serial_send_string("error\n");
+		//serial_send_string("error\n");
 	}
 }
 

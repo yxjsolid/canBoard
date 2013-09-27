@@ -91,21 +91,23 @@ void canEnableRecvInter(uint8 flag)
 void ex0_int(void) interrupt 0 using 1
 {
 	uint8 frameInfo;
-	
+
+#if 0	
 	rs485SetModeTx();
 	SBUF=0x66;
 	while(!TI);
 	TI=0;
 	rs485SetModeRx();
-
+#endif
 	if (IS_RECEIVE_INTR) //receive interrupt
 	{  
+#if 0
 		rs485SetModeTx();
 		SBUF=BCAN_READ_REG(REG_INTERRUPT) ;
 		while(!TI);
 		TI=0;
 
-		frameInfo = BCAN_READ_REG(REG_RXBuffer1);
+		
 //		length = frameInfo & 0x0F;
 
 		SBUF = frameInfo;
@@ -117,7 +119,8 @@ void ex0_int(void) interrupt 0 using 1
 		while(!TI);
 		TI=0;
 		rs485SetModeRx();
-
+#endif
+		frameInfo = BCAN_READ_REG(REG_RXBuffer1);
 		if ( (frameInfo & 0x40) != 0x40)  //数据帧   = 为远程帧
 		{  
 			if (frameInfo & 0x80)  //eff
@@ -200,7 +203,7 @@ void Init_Cpu(void)                                  //单片机初始化,开放外部中断
 {
 	PX0=0;
 	IT0=0; // TCON set EXC0 trigge mode
-	EX0=1;
+	EX0=0;
 	EA=0;
 }
 
@@ -420,7 +423,7 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 				rs485SetModeTx();
 				rsDataSend(&gRsData, sizeof(RS485DataStruct));
 				rs485SetModeRx();
-				
+
 				lastTicket = timerTicket;
 				state = RS_WAIT_REPLY;
 				break;
@@ -428,7 +431,7 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 
 			case RS_WAIT_REPLY:
 			{
-				if (timerTicket > lastTicket)
+				if (timerTicket >= lastTicket)
 				{
 					ticketDiff = timerTicket - lastTicket;
 				}
@@ -441,7 +444,12 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 				{
 					state = RS_SEND_REQ_RETRY;
 				}
-				else if (rsFrameReceived)
+				else
+				{
+					state = RS_WAIT_REPLY;
+				}
+
+				if (rsFrameReceived)
 				{	
 					state = RS_REPLY_RECEIVED;
 				}
@@ -457,15 +465,14 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 
 					replyCmdPtr = (canCmdDataStruct *)&(canFrameDataToSend.canData[0]);
 
-					replyCmdPtr->boardId = cmdDataPtr->boardId;
-					replyCmdPtr->boardType = cmdDataPtr->boardType;
 					replyCmdPtr->cmd = cmdDataPtr->cmd;
+					replyCmdPtr->boardType = cmdDataPtr->boardType;
+					replyCmdPtr->boardId = cmdDataPtr->boardId;
 					replyCmdPtr->status = gRsData.status;
 					replyCmdPtr->cmdData = gRsData.rsData;
 
 					rsFrameReceived = 0;
 					reqRetry = 0;
-
 					state = SEND_CAN_REPLY;
 				}
 				else
@@ -478,7 +485,7 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 
 			case RS_SEND_REQ_RETRY:
 			{
-				if (reqRetry > 2)
+				if (reqRetry > 1)
 				{
 					state = RS_REQ_TIMEOUT;
 				}
@@ -487,6 +494,7 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 					reqRetry++;
 					state = RS_SEND_REQ;
 				}
+
 				break;
 			}
 
@@ -494,10 +502,10 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 			{
 				replyCmdPtr = (canCmdDataStruct *)&(canFrameDataToSend.canData[0]);
 
-				replyCmdPtr->boardId = cmdDataPtr->boardId;
-				replyCmdPtr->boardType = cmdDataPtr->boardType;
 				replyCmdPtr->cmd = cmdDataPtr->cmd;
-				replyCmdPtr->status = Board_status_Disconnect;
+				replyCmdPtr->boardType = cmdDataPtr->boardType;
+				replyCmdPtr->boardId = cmdDataPtr->boardId;
+				replyCmdPtr->status = Board_status_Disconnected;
 
 				state = SEND_CAN_REPLY;
 				break;
@@ -506,6 +514,22 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 			case SEND_CAN_REPLY:
 			{
 				can_send_cmd_reply(stationId);
+
+
+				rs485SetModeTx();
+				SBUF = 0xcc;
+				while(!TI);
+				TI = 0;
+
+				SBUF = 0xcc;
+				while(!TI);
+				TI = 0;
+
+				SBUF = 0xcc;
+				while(!TI);
+				TI = 0;
+				rs485SetModeRx();
+				
 				return;
 			}
 
@@ -697,6 +721,7 @@ void handleCanFrame(canFrameStruct * canFramePtr)
 #endif
 
 
+//canFrameStruct canFrameData;
 
 void main(void)
 {  
@@ -759,6 +784,7 @@ void main(void)
 	while(!TI);
 	TI=0;
 
+	EX0 = 1;
 	EA=1; //初始化成功，开总中断
 #endif
 
@@ -780,38 +806,39 @@ void main(void)
 #endif
 		if (canFrameReceived)
 		{
-			//delay_ms(500);
-			//
-			//delay_ms(500);
-			//delay_ms(500);
-		
 
-			rs485SetModeTx();
-			SBUF=0x98;
-			while(!TI);
-			TI=0;
-			rs485SetModeRx();
+			
 		
 			while (BCAN_READ_REG(REG_STATUS)&0x1) //receive buffer not empty
 			{
 
-		#if 0	
-				memcpy((uint8 *)&(canFrameData), (uint8 *)REG_RXBuffer1, 13);
+	#if 0
 				rs485SetModeTx();
-				SBUF=0x99;
+				SBUF=0x98;
 				while(!TI);
 				TI=0;
 				rs485SetModeRx();
+
+				//CAN_Send_Frame(&(canFrameData));
+
+		
+				memcpy((uint8 *)&(canFrameData), (uint8 *)REG_RXBuffer1, 13);
+				
 		#endif
 				handleCanFrame((uint8 *)REG_RXBuffer1);
 				BCAN_CMD_PRG(RRB_CMD);
-				//CAN_Send_Frame(&(canFrameData));
+				//CAN_Send_Frame(&(canFrameData), 8);
 			}
 
 			canFrameReceived = 0;
 			canEnableRecvInter(1);
 		}
 
+
+
+		rsFrameReceived = 0;
+		rs485SetModeRx();//disable serial interrupt
+		
 
 		//delay_ms(500);
 #if 0	
