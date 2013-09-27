@@ -34,9 +34,9 @@ unsigned char a;
 bit flag = 0;
 bit rsFrameReceived = 0;
 bit canFrameReceived = 0;
+unsigned char num = 0;
 
-//BoardStatus idata OutPutBoard[16];
-//BoardStatus idata InPutBoard[16];
+
 
 void delay_ms(int t);
 void rs485SetModeRx(void);
@@ -191,8 +191,6 @@ void Sja_test(unsigned char CAN_TX_data)
 	TI=0;
 }
 
-
-
 //***************************************************
 
 //初始化cpu
@@ -231,9 +229,6 @@ void rs485SetModeTx()
 	ES=0;
 }
 
-unsigned char num = 0;
-uint8 inBuffer[RSDATA_FRAME_SIZE];
-
 void serial() interrupt 4
 {
 
@@ -256,7 +251,6 @@ void setTimer(void)
 	TL0=0xaf;  //50MS定时初值（T0计时用）
 }
 
-//定时器0初始化
 void timer0initial()
 {
 	TMOD |= 0x1;        //工作方式16位定时计数器
@@ -266,10 +260,6 @@ void timer0initial()
 	PT0=1;   // higher priority than EX0
 }
 
-//int timer_flag = 0;
-//int timer_count = 0;
-
-//定时器0中断,不够8个就在此发送
 void time_intt0(void) interrupt 1 using 2
 {
 	static unsigned char timer_count = 0;
@@ -361,69 +351,350 @@ void stateMachine(uint8 state)
 }
 
 
-rs_state rsState = RS_IDLE;
-
-void rs485StateMachine(int ticketIn)
+typedef enum handle_can_frame_state
 {
-	static int lastTicket = 0;
-	int ticketTmp = 0;
 	
-	switch(rsState)
+	RS_PREPARE_REQ,
+	RS_SEND_REQ,
+	RS_WAIT_REPLY,
+	RS_REQ_TIMEOUT,
+	RS_SEND_REQ_RETRY,
+	RS_REPLY_RECEIVED,
+
+	PREPARE_CMD_REPLY,
+	SEND_CAN_REPLY
+}handle_can_frame_state;
+
+
+
+
+typedef struct canCmdDataStruct
+{	
+	uint8 cmd;
+	uint8 boardType;
+	uint8 boardId;
+	uint8 status;
+	uint8 cmdData;
+}canCmdDataStruct;
+
+
+
+canFrameStruct canFrameDataToSend;
+
+void can_send_cmd_reply(uint8 stationId)
+{
+	*((uint16 *)&(canFrameDataToSend.id[2])) = (stationId << 3);
+	CAN_Send_Frame(&(canFrameDataToSend), sizeof(canCmdDataStruct));
+}
+
+
+#if 1
+void handleCanFrame(canFrameStruct * canFramePtr)
+{
+	uint8 state = RS_PREPARE_REQ;
+	uint16 lastTicket = 0;
+	uint16 ticketDiff = 0;
+	uint8 reqRetry = 0;
+	uint8 stationId = (*((uint16 *)&(canFramePtr->id[2]))) >> 3; //hacke, to get station from request
+	canCmdDataStruct *cmdDataPtr =  (canCmdDataStruct *)&(canFramePtr->canData[0]);
+	canCmdDataStruct *replyCmdPtr = 0;
+	
+	while(1)
 	{
-		case RS_IDLE:
+		switch(state)
 		{
-
-		}
-			break;
-
-		case RS_READY_TO_SEND:
-		{	
-			rs485SetModeTx();
-			gRsData.boartType = 0xf1;
-			gRsData.boardId = 0xf2;
-			gRsData.status = 0xf3;
-			gRsData.rsData = 0xf4;
-			rsDataSend(&gRsData, sizeof(gRsData));
-			rs485SetModeRx();
-			lastTicket = ticketIn;
-
-			rsState = RS_WAIT_REPLY;
-		}
-			break;
-
-		case RS_WAIT_REPLY:
-		{
-			if (ticketIn > lastTicket)
+			case RS_PREPARE_REQ:
 			{
-				ticketTmp = ticketIn - lastTicket;
-			}
-			else
-			{
-				ticketTmp = ticketIn + 0xffff - lastTicket;
-			}
-			
-			if (rsFrameReceived)
-			{	
-				rs485SetModeTx();
-				gRsData.boartType = *((uint8 *)ticketTmp);
-				gRsData.boardId = *(((uint8 *)ticketTmp)+1);
-				
-				rsDataSend(&gRsData, sizeof(gRsData));
-				rs485SetModeRx();
-				rsFrameReceived = 0;
-			}
-		}
-			break;
+				gRsData.boardId = cmdDataPtr->boardId;
+				gRsData.boardType = cmdDataPtr->boardType;
+				gRsData.cmd = cmdDataPtr->cmd | CMD_BIT_REQ;
+				gRsData.status = cmdDataPtr->status;
+				gRsData.rsData = cmdDataPtr->cmdData;
 
-		case RS_REPLY_RECV:
-		{
-
-		}
-			break;
-
+				state = RS_SEND_REQ;
+				break;
+			}
 		
+			case RS_SEND_REQ:
+			{
+				rs485SetModeTx();
+				rsDataSend(&gRsData, sizeof(RS485DataStruct));
+				rs485SetModeRx();
+				
+				lastTicket = timerTicket;
+				state = RS_WAIT_REPLY;
+				break;
+			}
+
+			case RS_WAIT_REPLY:
+			{
+				if (timerTicket > lastTicket)
+				{
+					ticketDiff = timerTicket - lastTicket;
+				}
+				else
+				{
+					ticketDiff = 0xffff - lastTicket + timerTicket; 
+				}
+
+				if (ticketDiff > 2)
+				{
+					state = RS_SEND_REQ_RETRY;
+				}
+				else if (rsFrameReceived)
+				{	
+					state = RS_REPLY_RECEIVED;
+				}
+
+				break;
+			}
+
+			case RS_REPLY_RECEIVED:
+			{
+				if ( cmdDataPtr->boardType == gRsData.boardType
+						&& cmdDataPtr->boardId == gRsData.boardId)
+				{
+
+					replyCmdPtr = (canCmdDataStruct *)&(canFrameDataToSend.canData[0]);
+
+					replyCmdPtr->boardId = cmdDataPtr->boardId;
+					replyCmdPtr->boardType = cmdDataPtr->boardType;
+					replyCmdPtr->cmd = cmdDataPtr->cmd;
+					replyCmdPtr->status = gRsData.status;
+					replyCmdPtr->cmdData = gRsData.rsData;
+
+					rsFrameReceived = 0;
+					reqRetry = 0;
+
+					state = SEND_CAN_REPLY;
+				}
+				else
+				{
+					state = RS_SEND_REQ_RETRY;
+				}
+
+				break;
+			}
+
+			case RS_SEND_REQ_RETRY:
+			{
+				if (reqRetry > 2)
+				{
+					state = RS_REQ_TIMEOUT;
+				}
+				else
+				{
+					reqRetry++;
+					state = RS_SEND_REQ;
+				}
+				break;
+			}
+
+			case RS_REQ_TIMEOUT:
+			{
+				replyCmdPtr = (canCmdDataStruct *)&(canFrameDataToSend.canData[0]);
+
+				replyCmdPtr->boardId = cmdDataPtr->boardId;
+				replyCmdPtr->boardType = cmdDataPtr->boardType;
+				replyCmdPtr->cmd = cmdDataPtr->cmd;
+				replyCmdPtr->status = Board_status_Disconnect;
+
+				state = SEND_CAN_REPLY;
+				break;
+			}
+
+			case SEND_CAN_REPLY:
+			{
+				can_send_cmd_reply(stationId);
+				return;
+			}
+
+		}
+
 	}
 }
+
+#endif
+
+
+
+#if 0
+void handleCanFrame(canFrameStruct * canFramePtr)
+{
+	uint8 state = RS_SEND_REQ;
+
+	uint8 reqIndex = 0;
+	uint16 lastTicket = 0;
+	uint16 ticketDiff = 0;
+	uint8 reqRetry = 0;
+
+
+	uint8 sendBoardId = 0;
+	uint8 sendBoardType = 0;
+	uint8 sendRsData = 0;
+
+	uint8 canDataIndex = 0;
+	uint8 sendInputBoardCnt = 0;
+	uint8 sendOutputBoardCnt = 0;
+
+	uint8 canFrameType = canFramePtr->id[0] & 0x7f;
+	uint8 inBoardCnt = (canFramePtr->id[1] & 0xf0) >> 4;
+	uint8 outBoardCnt = (canFramePtr->id[1] & 0x0f);
+
+	uint8 *canDataPtr = &(canFramePtr->canData[0]);
+
+	//uint8 stationId = ((canFramePtr->id[2] & 0x7) << 5) & ((canFramePtr->id[3] & 0xf8) >> 3)
+
+	uint8 stationId = (*((uint16 *)&(canFramePtr->id[2]))) >> 3; //hacke, to get station from request
+	bit allOk = 0;
+	
+	while(1)
+	{
+		switch(state)
+		{
+			case RS_SEND_REQ:
+			{
+				if (reqRetry != 1)
+				{
+					reqRetry = 0;
+					if (inBoardCnt)
+					{
+						sendBoardId = *(canDataPtr++);
+						sendBoardType = BOARD_INPUT;
+						inBoardCnt--;
+					}
+					else if (outBoardCnt)
+					{
+						if (CMD_STATUS_CHECK == canFrameType)
+						{
+							sendBoardId = *(canDataPtr++);
+						}
+						else if (CMD_SET_ACTION == canFrameType)
+						{
+							sendBoardId = *(canDataPtr++);
+							sendRsData = *(canDataPtr++);
+						}
+						sendBoardType = BOARD_OUTPUT;
+						outBoardCnt--;
+					}
+					else
+					{
+						state = SEND_CAN_REPLY;
+						allOk = 1;
+						break;
+					}
+				}
+
+				gRsData.boardId = sendBoardId;
+				gRsData.boardType = sendBoardType;
+				gRsData.cmdType = canFrameType;
+				gRsData.status = canFrameType;
+				gRsData.rsData = sendRsData;
+
+				rs485SetModeTx();
+				rsDataSend(&gRsData, sizeof(RS485DataStruct));
+				rs485SetModeRx();
+				lastTicket = timerTicket;
+
+				state = RS_WAIT_REPLY;
+
+				break;
+			}
+
+			case RS_WAIT_REPLY:
+			{
+				if (timerTicket > lastTicket)
+				{
+					ticketDiff = timerTicket - lastTicket;
+				}
+				else
+				{
+					ticketDiff = 0xffff - lastTicket + timerTicket; 
+				}
+
+				if (ticketDiff > 2)
+				{
+					state = RS_SEND_REQ_RETRY;
+				}
+				
+				if (rsFrameReceived)
+				{	
+					state = RS_REPLY_RECEIVED;
+				}
+
+				break;
+			}
+
+			case RS_REPLY_RECEIVED:
+			{
+				if ( sendBoardType == gRsData.boardType
+					&& sendBoardId == gRsData.boardId)
+				{
+					canFrameDataToSend.canData[canDataIndex++] = gRsData.boardId;
+					if (sendBoardType == BOARD_INPUT)
+					{
+						canFrameDataToSend.canData[canDataIndex++] = gRsData.rsData;
+						sendInputBoardCnt++;
+					}
+					else
+					{
+						sendOutputBoardCnt++;
+					}
+
+					if (canDataIndex == 8)
+					{
+						state = SEND_CAN_REPLY;
+						canDataIndex = 0;
+					}
+					else
+					{
+						state = RS_SEND_REQ;
+					}
+
+					rsFrameReceived = 0;
+
+					reqRetry = 0;
+
+				}
+				else
+				{
+					state = RS_SEND_REQ_RETRY;
+				}
+
+				break;
+			}
+
+			case RS_SEND_REQ_RETRY:
+			{
+				reqRetry++;
+				state = RS_SEND_REQ;
+				break;
+			}
+
+			case SEND_CAN_REPLY:
+			{
+				canFrameDataToSend.id[0] = canFrameType & 0x80;
+				canFrameDataToSend.id[1] = (sendInputBoardCnt << 4) | sendOutputBoardCnt;
+				*((uint16 *)&(canFrameDataToSend.id[2])) = (stationId << 3);
+				CAN_Send_Frame(&(canFrameDataToSend));
+				
+				if (!allOk)
+				{
+					state = RS_SEND_REQ;
+				}
+				else
+				{
+					return;
+				}
+				break;
+			}
+
+		}
+
+	}
+}
+
+#endif
 
 
 
@@ -497,7 +768,8 @@ void main(void)
 	//次标识位可以作为，串口接收完，置标志然后发送出去或者当作按键发送******
 	while(1) 
 	{
-
+	
+#if 0
 		if (rsFrameReceived)
 		{
 			rs485SetModeTx();
@@ -505,7 +777,7 @@ void main(void)
 			rs485SetModeRx();
 			rsFrameReceived = 0;
 		}
-
+#endif
 		if (canFrameReceived)
 		{
 			//delay_ms(500);
@@ -522,15 +794,18 @@ void main(void)
 		
 			while (BCAN_READ_REG(REG_STATUS)&0x1) //receive buffer not empty
 			{
+
+		#if 0	
 				memcpy((uint8 *)&(canFrameData), (uint8 *)REG_RXBuffer1, 13);
 				rs485SetModeTx();
 				SBUF=0x99;
 				while(!TI);
 				TI=0;
 				rs485SetModeRx();
-
+		#endif
+				handleCanFrame((uint8 *)REG_RXBuffer1);
 				BCAN_CMD_PRG(RRB_CMD);
-				CAN_Send_Frame(&(canFrameData));
+				//CAN_Send_Frame(&(canFrameData));
 			}
 
 			canFrameReceived = 0;
@@ -539,7 +814,7 @@ void main(void)
 
 
 		//delay_ms(500);
-#if 1	
+#if 0	
 		if(flag==1)
 		{
 			rs485SetModeTx();
@@ -571,7 +846,7 @@ void main(void)
 			{
 				memset(&(gRsData), 0, sizeof(gRsData));
 
-				gRsData.boartType = 0xf1;
+				gRsData.boardType = 0xf1;
 				gRsData.boardId = 0xf2;
 				gRsData.status= 0xf3;
 				gRsData.rsData = 0xf4;

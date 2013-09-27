@@ -15,16 +15,12 @@
 #define FRAME_SIZE(x) (5 + x + x/2 + x%2)
 #define RSDATA_FRAME_SIZE FRAME_SIZE(RSDATA_SIZE)
 
-#define STAT_BIT_INIT 			0x01
-#define STAT_BIT_CONNECTED 		0x02
-#define STAT_BIT_RECOVER 		0x04
-#define STAT_BIT_RECOVER_REPLY 	0x08
-#define STAT_BIT_REQ 			0x80
 
-
+#define CMD_BIT_REQ 			0x80
 typedef struct RS485DataStruct
 {	
-	uint8 boartType;
+	uint8 cmd;
+	uint8 boardType;
 	uint8 boardId;
 	uint8 status;
 	uint8 rsData;
@@ -44,7 +40,7 @@ enum BoardStat
 };
 
 
-
+#if 0
 typedef enum rs_state
 {
 	RS_IDLE = 0,
@@ -52,9 +48,11 @@ typedef enum rs_state
 	RS_WAIT_REPLY,
 	RS_REPLY_RECV
 }rs_state;
-
+#endif
 
 extern RS485DataStruct gRsData;
+
+
 extern uint8 boardID;
 extern uint8 boardType;
 extern uint8 boardStatus;

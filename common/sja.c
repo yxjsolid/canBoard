@@ -289,7 +289,7 @@ unsigned char BCAN_DATA_WRITE(unsigned char *SendDataBuf)
 }
 
 
-void CAN_Send_Frame(canFrameStruct * frame)
+void CAN_Send_Frame(canFrameStruct * frame, uint8 len)
 {
 	unsigned char temptt;
 	loop:
@@ -299,7 +299,7 @@ void CAN_Send_Frame(canFrameStruct * frame)
 	if((temptt&0x04)==0x00)  goto loop;               //循环检测等待                       
 	//可以向发送缓冲器写数据
 	{
-		memcpy((uint8 *)REG_RXBuffer1,frame,13);   
+		memcpy((uint8 *)REG_RXBuffer1,frame,len);   
 		//数据发送请求
     	BCAN_CMD_PRG(TR_CMD);            //请求发送  
 	}

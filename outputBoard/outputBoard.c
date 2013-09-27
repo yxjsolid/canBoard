@@ -37,7 +37,7 @@ void initBoard(void)
 {
 	boardID = 1;
 	boardType = BOARD_OUTPUT;
-	boardStatus = STAT_BIT_INIT;
+	boardStatus = Board_status_Init;
 }
 
 //***************************************************
@@ -81,7 +81,7 @@ void serial() interrupt 4
 	
 #if 1
 	//rsFrameReceived = 0;
-	if (rsDataReceive(chIn, &gRsData, sizeof(RS485DataStruct)))
+	if (rsDataReceive(chIn, (uint8 *)&gRsData, sizeof(RS485DataStruct)))
 	{
 		rs485SetModeTx();//disable serial interrupt
 		rsFrameReceived = 1;
@@ -201,7 +201,7 @@ void main(void)
 	{
 		if (rsFrameReceived)
 		{
-			delay_ms(500);
+			//delay_ms(500);
 
 			rs485SetModeTx();
 			handleRsCmd();

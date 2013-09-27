@@ -161,7 +161,7 @@ extern uint8 Sja_1000_Init(uint8);
 extern bit  BCAN_CMD_PRG(uint8 cmd);
 extern void CAN_Send_onebyte(unsigned char CAN_TX_data,unsigned char length1);
 extern void CAN_Send_Data(uint8 num);
-extern void CAN_Send_Frame(canFrameStruct * frame);
+extern void CAN_Send_Frame(canFrameStruct * frame, uint8 len);
 
 
 

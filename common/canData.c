@@ -4,7 +4,7 @@
 
 
 
-canFrameStruct canFrameData;
+//canFrameStruct canFrameData;
 
 void setBoard(uint8 id, uint8 dataIn)
 {
@@ -25,51 +25,6 @@ void handleCmdSet(int dataSize, uint8 *dataIn)
 		setBoard(*dataPtr, *(dataPtr+1));
 	}
 }
-
-
-
-void handleCanRequest(canFrameStruct * canFrame)
-{
-	uint8 cmd = GET_CMD(canFrame);
-	int dataSize = GET_DATA_SIZE(canFrame);
-
-	switch(cmd)
-	{
-		case CMD_SET:
-		{
-			handleCmdSet(dataSize, canFrame->canData);
-			break;
-		}
-
-
-		case CMD_READ:
-		{
-
-			break;
-		}
-		
-		
-
-		
-
-			
-		
-	}
-	
-
-
-
-}
-
-
-void sendCanReply(canFrameStruct * canFrame)
-{
-
-
-
-}
-
-
 
 
 

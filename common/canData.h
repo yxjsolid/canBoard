@@ -26,17 +26,9 @@ typedef struct canFrameStruct
 
 
 
-enum CMD_ID
-{
-	CMD_EMERGE = 0,
-	CMD_SET,
-	CMD_READ,
-	
-
-};
 
 
-extern canFrameStruct canFrameData;
+//extern canFrameStruct canFrameData;
 
 #endif
 

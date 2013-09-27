@@ -5,6 +5,7 @@
 
 RS485DataStruct gRsData;
 
+
 void init_serialcomm(uint8 baudRate, uint8 freq)
 {
     SCON  = 0x50;       //SCON: serail mode 1, 8-bit UART, enable ucvr
@@ -226,14 +227,14 @@ void rsDataSend(uint8 *rsDataIn, int size)
 
 bit isRsCmdValid()
 {
-	if ( !(gRsData.status & STAT_BIT_REQ))
+	if ( !(gRsData.cmd & CMD_BIT_REQ))
 	{
 		/*cmd is reply, ignored*/
 		return 0;
 	}
 	else
 	{
-		if (gRsData.boartType == boardType && gRsData.boardId == boardID)
+		if (gRsData.boardType == boardType && gRsData.boardId == boardID)
 		{
 			return 1;
 		}
@@ -242,44 +243,46 @@ bit isRsCmdValid()
 	return 0;
 }
 
+
+
 uint8 getReplyStatus()
 {
 	uint8 status = gRsData.status;
 	
 	switch(boardStatus)
 	{
-		case STAT_BIT_INIT:
+		case Board_status_Init:
 		{
-			if (status & STAT_BIT_CONNECTED)
+			if (status == Board_status_Connected)
 			{
-				boardStatus = STAT_BIT_RECOVER;
-				return STAT_BIT_RECOVER;
+				boardStatus = Board_status_Recover;
+				return Board_status_Recover;
 			}
 
-			if (status & STAT_BIT_INIT)
+			if (status & Board_status_Init)
 			{
-				boardStatus = STAT_BIT_CONNECTED;
-				return STAT_BIT_CONNECTED;
+				boardStatus = Board_status_Connected;
+				return Board_status_Connected;
 			}
 
 		}
 			break;
 
-		case STAT_BIT_CONNECTED:
+		case Board_status_Connected:
 		{
-			return STAT_BIT_CONNECTED;
+			return Board_status_Connected;
 		}
 			break;
 
-		case STAT_BIT_RECOVER:
+		case Board_status_Recover:
 		{
-			if (status & STAT_BIT_RECOVER_REPLY)
+			if (status & Board_status_recover_Reply)
 			{
-				boardStatus = STAT_BIT_CONNECTED;
-				return STAT_BIT_CONNECTED;
+				boardStatus = Board_status_Connected;
+				return Board_status_Connected;
 			}
 			
-			return STAT_BIT_RECOVER;
+			return Board_status_Recover;
 		}
 			break;
 
@@ -297,13 +300,12 @@ void handleRsCmd(void)
 	uint8 replyData = 0;
 	RS485DataStruct rsReplyData;
 
-	serial_send_string("handle\n");
+	//serial_send_string("handle\n");
 
 	if ( isRsCmdValid())
 	{
-		serial_send_string("valid\n");
+		//serial_send_string("valid\n");
 
-	
 		status = getReplyStatus();
 
 		switch(boardType)
@@ -316,18 +318,21 @@ void handleRsCmd(void)
 
 			case BOARD_OUTPUT:
 			{
-				P1 = gRsData.rsData;
+				if (gRsData.cmd == CMD_SET_ACTION)
+				{
+					P1 = gRsData.rsData;
+				}
 			}
 				break;
 				
 		}
 
-		rsReplyData.boartType = boardType;
+		rsReplyData.boardType = boardType;
 		rsReplyData.boardId = boardID;
 		rsReplyData.status = status;
 		rsReplyData.rsData = replyData;
 
-		rsDataSend(&rsReplyData, sizeof(rsReplyData));
+		rsDataSend((uint8 *)&rsReplyData, sizeof(RS485DataStruct));
 	}
 	else
 	{

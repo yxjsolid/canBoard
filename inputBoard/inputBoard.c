@@ -72,7 +72,6 @@ void sendTest(uint8 test)
 
 }
 
-uint8 buffer[20];
 void serial() interrupt 4 using 1
 {
 
@@ -82,14 +81,9 @@ void serial() interrupt 4 using 1
 	RI = 0;
 
 	//while(1);
-
-	buffer[num] = a;
-	num++;
-	num %= 20;
-	
 #if 1
 	rsFrameReceived = 0;
-	if (rsDataReceive(a, &rsData, sizeof(RS485DataStruct)))
+	if (rsDataReceive(a, (uint8 *)&gRsData, sizeof(RS485DataStruct)))
 	{
 		rsFrameReceived = 1;
 		rs485SetModeTx();//disable serial interrupt
@@ -215,16 +209,11 @@ void main(void)
 		if (rsFrameReceived)
 		{
 			rs485SetModeTx();
-			rsData.boartType = 0xf1;
-				rsData.boardId = 0xf2;
-				rsData.cmd = 0xf3;
-				rsData.rsData = 0xf4;
-			
-			rsDataSend(&rsData, sizeof(rsData));
-			rs485SetModeRx();
+			handleRsCmd();
 			rsFrameReceived = 0;
+			rs485SetModeRx();
 		}
-#if 1
+#if 0
 		if (num == 11)
 		{
 			rs485SetModeTx();
